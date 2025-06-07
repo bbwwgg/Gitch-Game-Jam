@@ -1,0 +1,19 @@
+{
+  "FolderOrderSettings": [
+    {"name":"group1","order":9,"path":"folders/group1.yy",},
+    {"name":"Camera","order":1,"path":"folders/group1/Camera.yy",},
+    {"name":"tilesets","order":10,"path":"folders/tilesets.yy",},
+    {"name":"Objects + entities","order":3,"path":"folders/tilesets/Objects + entities.yy",},
+  ],
+  "ResourceOrderSettings": [
+    {"name":"sGrass_tile","order":1,"path":"sprites/sGrass_tile/sGrass_tile.yy",},
+    {"name":"oGameController","order":1,"path":"objects/oGameController/oGameController.yy",},
+    {"name":"sEntityTiles","order":1,"path":"tilesets/sEntityTiles/sEntityTiles.yy",},
+    {"name":"sBgTile","order":5,"path":"sprites/sBgTile/sBgTile.yy",},
+    {"name":"pEntity","order":11,"path":"objects/pEntity/pEntity.yy",},
+    {"name":"setup_board_camera","order":7,"path":"scripts/setup_board_camera/setup_board_camera.yy",},
+    {"name":"oPlayerController","order":3,"path":"objects/oPlayerController/oPlayerController.yy",},
+    {"name":"sPlayer","order":4,"path":"sprites/sPlayer/sPlayer.yy",},
+    {"name":"sGrassTile","order":2,"path":"tilesets/sGrassTile/sGrassTile.yy",},
+  ],
+}

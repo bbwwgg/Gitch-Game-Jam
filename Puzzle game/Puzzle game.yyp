@@ -1,0 +1,47 @@
+{
+  "resourceType": "GMProject",
+  "resourceVersion": "1.7",
+  "name": "Puzzle game",
+  "AudioGroups": [
+    {"resourceType":"GMAudioGroup","resourceVersion":"1.3","name":"audiogroup_default","targets":-1,},
+  ],
+  "configs": {
+    "children": [],
+    "name": "Default",
+  },
+  "defaultScriptType": 1,
+  "Folders": [
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"group1","folderPath":"folders/group1.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Camera","folderPath":"folders/group1/Camera.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"tilesets","folderPath":"folders/tilesets.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Objects + entities","folderPath":"folders/tilesets/Objects + entities.yy",},
+  ],
+  "IncludedFiles": [],
+  "isEcma": false,
+  "LibraryEmitters": [],
+  "MetaData": {
+    "IDEVersion": "2023.11.1.129",
+  },
+  "resources": [
+    {"id":{"name":"oCamera","path":"objects/oCamera/oCamera.yy",},},
+    {"id":{"name":"sGrass_tile","path":"sprites/sGrass_tile/sGrass_tile.yy",},},
+    {"id":{"name":"oGameController","path":"objects/oGameController/oGameController.yy",},},
+    {"id":{"name":"sEntityTiles","path":"tilesets/sEntityTiles/sEntityTiles.yy",},},
+    {"id":{"name":"sBgTile","path":"sprites/sBgTile/sBgTile.yy",},},
+    {"id":{"name":"sEntityTileset","path":"sprites/sEntityTileset/sEntityTileset.yy",},},
+    {"id":{"name":"pEntity","path":"objects/pEntity/pEntity.yy",},},
+    {"id":{"name":"setup_board_camera","path":"scripts/setup_board_camera/setup_board_camera.yy",},},
+    {"id":{"name":"oPlayerController","path":"objects/oPlayerController/oPlayerController.yy",},},
+    {"id":{"name":"sPlayer","path":"sprites/sPlayer/sPlayer.yy",},},
+    {"id":{"name":"sGrass_base_tile","path":"sprites/sGrass_base_tile/sGrass_base_tile.yy",},},
+    {"id":{"name":"sGrassTile","path":"tilesets/sGrassTile/sGrassTile.yy",},},
+    {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+  ],
+  "RoomOrderNodes": [
+    {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+  ],
+  "templateType": "game",
+  "TextureGroups": [
+    {"resourceType":"GMTextureGroup","resourceVersion":"1.3","name":"Default","autocrop":true,"border":2,"compressFormat":"bz2","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"targets":-1,},
+  ],
+}
