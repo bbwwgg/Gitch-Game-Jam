@@ -5,6 +5,13 @@ enum MAP_DATA{
 	COUNT	
 }
 
+enum ENITITY{
+	EMPTY,
+	PLAYER,
+	FLAG,
+	COUNT
+}
+
 square_size = 16
 
 var base_lay_id = layer_get_id("BaseTile");
@@ -27,16 +34,19 @@ global.map = ds_grid_create(grid_width,grid_height)
 
 for(var i = 0; i < grid_height; i ++){
 	for(var j = 0; j < grid_width; j ++){
-		global.map[# j, i] = array_create(MAP_DATA.COUNT,0)
+		global.map[# j, i] = array_create(MAP_DATA.COUNT,noone)
 		
 		global.map[# j, i][MAP_DATA.TILE] = tilemap_get(map_id,j,i)
 		
 		var _entity = tilemap_get(entity_map,j,i)
 		
-		if _entity != 0{
+		if _entity > 0{
+			
 			with instance_create_layer(j*square_size,i*square_size,"Entity", pEntity){
 				entity_id = _entity
+				global.map[# j, i][MAP_DATA.ENTITY] = id
 			}
+
 		}
 		
 	}

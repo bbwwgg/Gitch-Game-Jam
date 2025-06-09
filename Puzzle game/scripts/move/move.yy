@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "setup_board_camera",
+  "name": "move",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Camera",
-    "path": "folders/Camera.yy",
+    "name": "Puzzle game",
+    "path": "Puzzle game.yyp",
   },
 }

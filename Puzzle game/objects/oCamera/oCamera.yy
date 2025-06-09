@@ -10,7 +10,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "Camera",
-    "path": "folders/group1/Camera.yy",
+    "path": "folders/Camera.yy",
   },
   "parentObjectId": null,
   "persistent": false,
