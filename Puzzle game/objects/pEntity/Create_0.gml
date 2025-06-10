@@ -17,5 +17,9 @@ function fall(){
 }
 
 function interact(){
+	
+	
+	if entity_id = ENITITY.PLAYER{return}
+	
 	script_execute(interact_script)
 }

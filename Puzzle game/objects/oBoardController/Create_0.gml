@@ -71,17 +71,78 @@ base_yOffset = global.camera_margin_height
 
 
 
-global.board_state[0] = []
+global.board_state = []
 
-function copy_board(){
-	
+/// @func save_board_state()
+/// @desc Saves the current global.board state into global.board_state stack
+
+function save_board_state() {
+    // Create a new ds_grid copy for the snapshot
+    var snapshot = ds_grid_create(global.board_width, global.board_height);
+
+    for (var _y = 0; _y < global.board_height; _y++) {
+        for (var _x = 0; _x  < global.board_width; _x ++) {
+            var cell = global.board[# _x , _y];
+            // Deep copy the cell array
+            var cell_copy = array_create(array_length(cell), noone);
+            for (var i = 0; i < array_length(cell); i++) {
+                // If nested arrays inside cell[i], copy deeper if needed. For now assuming flat arrays or primitives
+                // If you have nested arrays inside cell[i], recursively deep copy here.
+                if (is_array(cell[i])) {
+                    // Deep copy nested array
+                    var nested = cell[i];
+                    var nested_copy = array_create(array_length(nested), noone);
+                    for (var j = 0; j < array_length(nested); j++) {
+                        nested_copy[j] = nested[j];
+                    }
+                    cell_copy[i] = nested_copy;
+                } else {
+                    cell_copy[i] = cell[i];
+                }
+            }
+            snapshot[# _x, _y] = cell_copy;
+        }
+    }
+
+    // Push snapshot to global.board_state stack
+    array_push(global.board_state, snapshot);
 }
 
-function undo_board(_board_grid){
-	
-	for(var i = 0; i < grid_height; i ++){
-		for(var j = 0; j < grid_width; j ++){
+// Similarly for undo:
+function undo_board_state() {
+    if (array_length(global.board_state) == 0) {
+        show_debug_message("No saved board states to undo.");
+        return;
+    }
 
+    // Pop the last saved state snapshot
+    var snapshot = array_pop(global.board_state);
+
+    // Replace global.board with snapshot
+    // First free the current grid
+    if (ds_exists(global.board, ds_type_grid)) {
+        ds_grid_destroy(global.board);
+    }
+	
+	
+    global.board = snapshot;
+
+    // You may want to refresh or update entities and objects visually here if needed
+    // For example, update instances or tilemaps based on restored grid
+
+    for (var _y = 0; _y < global.board_height; _y++) {
+        for (var _x = 0; _x  < global.board_width; _x ++) {
+			var cell = global.board[# _x, _y][MAP_DATA.ENTITY] 
+			if cell != noone{
+				for (var i = 0; i < array_length(cell); i++) {
+					cell[i].xTile = _x
+					cell[i].yTile = _y
+					
+					cell[i].update_pos()
+				}
+			}
 		}
 	}
+
+    show_debug_message("Board state restored from undo.");
 }

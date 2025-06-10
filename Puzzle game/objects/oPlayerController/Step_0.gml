@@ -1,7 +1,17 @@
+if  keyboard_check_pressed(ord("Z")){
+	oBoardController.undo_board_state()
+}
+
+if  keyboard_check_pressed(ord("R")){
+	room_restart()
+}
+
+
 var h = keyboard_check_pressed(ord("D"))-keyboard_check_pressed(ord("A")) 
 var v = keyboard_check_pressed(ord("S"))-keyboard_check_pressed(ord("W")) 
 
 var dir = -1
+
 
 if (h != 0) {
     dir = (h == 1) ? 0 : 2; // 0 = right, 2 = left
@@ -12,6 +22,7 @@ else if (v != 0) {
 
 
 if dir != -1{
+	oBoardController.save_board_state()
 	for(var i = 0; i < player_count; i ++){
 		var _player = player_instance[i]
 		if player_instance[i].interactable{
@@ -19,3 +30,5 @@ if dir != -1{
 		}
 	}
 }
+
+
