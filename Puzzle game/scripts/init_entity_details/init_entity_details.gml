@@ -7,6 +7,8 @@ function init_entity_details(_id){
 		break
 		case ENITITY.FLAG:
 			stop = false
+			moveable = false
+			sprite_index = sFlag
 		break
 		case ENITITY.BOX:
 			moveable = true

@@ -1,6 +1,7 @@
 {
   "FolderOrderSettings": [
     {"name":"Camera","order":9,"path":"folders/Camera.yy",},
+    {"name":"group1","order":19,"path":"folders/group1.yy",},
     {"name":"Room","order":15,"path":"folders/Room.yy",},
     {"name":"tilesets","order":6,"path":"folders/tilesets.yy",},
     {"name":"Objects + entities","order":3,"path":"folders/tilesets/Objects + entities.yy",},
@@ -22,11 +23,13 @@
     {"name":"interact_lock","order":18,"path":"scripts/interact_lock/interact_lock.yy",},
     {"name":"pEntity","order":7,"path":"objects/pEntity/pEntity.yy",},
     {"name":"move","order":8,"path":"scripts/move/move.yy",},
+    {"name":"sFlag","order":20,"path":"sprites/sFlag/sFlag.yy",},
     {"name":"setup_board_camera","order":1,"path":"scripts/setup_board_camera/setup_board_camera.yy",},
     {"name":"oPlayerController","order":2,"path":"objects/oPlayerController/oPlayerController.yy",},
     {"name":"sObjects","order":2,"path":"sprites/sObjects/sObjects.yy",},
     {"name":"level_test5","order":6,"path":"rooms/level_test5/level_test5.yy",},
     {"name":"sPlayer","order":3,"path":"sprites/sPlayer/sPlayer.yy",},
+    {"name":"Script7","order":21,"path":"scripts/Script7/Script7.yy",},
     {"name":"sGrassTile","order":2,"path":"tilesets/sGrassTile/sGrassTile.yy",},
   ],
 }

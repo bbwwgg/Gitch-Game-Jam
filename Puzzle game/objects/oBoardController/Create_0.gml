@@ -1,5 +1,4 @@
 square_size = TILE_SIZE
-
 var base_lay_id = layer_get_id("BaseTile");
 var entity_lay_id = layer_get_id("Entities");
 var object_lay_id = layer_get_id("Objects");
@@ -73,40 +72,57 @@ base_yOffset = global.camera_margin_height
 
 global.board_state = []
 
-/// @func save_board_state()
-/// @desc Saves the current global.board state into global.board_state stack
-
 function save_board_state() {
-    // Create a new ds_grid copy for the snapshot
     var snapshot = ds_grid_create(global.board_width, global.board_height);
 
     for (var _y = 0; _y < global.board_height; _y++) {
-        for (var _x = 0; _x  < global.board_width; _x ++) {
-            var cell = global.board[# _x , _y];
-            // Deep copy the cell array
+        for (var _x = 0; _x < global.board_width; _x++) {
+            var cell = global.board[# _x, _y];
             var cell_copy = array_create(array_length(cell), noone);
+
             for (var i = 0; i < array_length(cell); i++) {
-                // If nested arrays inside cell[i], copy deeper if needed. For now assuming flat arrays or primitives
-                // If you have nested arrays inside cell[i], recursively deep copy here.
-                if (is_array(cell[i])) {
-                    // Deep copy nested array
-                    var nested = cell[i];
+                var item = cell[i];
+
+                if (is_array(item)) {
+                    // If this is an array, deep copy its contents, but also check if it contains instances
+                    var nested = item;
                     var nested_copy = array_create(array_length(nested), noone);
+
                     for (var j = 0; j < array_length(nested); j++) {
-                        nested_copy[j] = nested[j];
+                        var nested_item = nested[j];
+						
+                        if (instance_exists(nested_item)) {
+                            // Save instance with vars
+							
+                            nested_copy[j] = {
+                                inst: nested_item,
+                                vars: {
+                                    interactable: nested_item.interactable,
+                                    stop: nested_item.stop,
+                                    moveable: nested_item.moveable,
+                                    sunk: nested_item.sunk
+                                }
+                            };
+                        } else {
+                            nested_copy[j] = nested_item;
+                        }
                     }
                     cell_copy[i] = nested_copy;
-                } else {
-                    cell_copy[i] = cell[i];
+
+                 } else {
+                    // Primitive or noone
+                    cell_copy[i] = item;
                 }
             }
+
             snapshot[# _x, _y] = cell_copy;
         }
     }
 
-    // Push snapshot to global.board_state stack
     array_push(global.board_state, snapshot);
 }
+
+
 
 // Similarly for undo:
 function undo_board_state() {
@@ -134,15 +150,28 @@ function undo_board_state() {
         for (var _x = 0; _x  < global.board_width; _x ++) {
 			var cell = global.board[# _x, _y][MAP_DATA.ENTITY] 
 			if cell != noone{
+				var _inst_ar = []
 				for (var i = 0; i < array_length(cell); i++) {
-					cell[i].xTile = _x
-					cell[i].yTile = _y
+					var _cur_cell = cell[i]
+					var _cur_inst = _cur_cell.inst
 					
-					cell[i].update_pos()
+					_cur_inst.xTile = _x
+					_cur_inst.yTile = _y
+					
+					_cur_inst.update_pos()
+					
+					_cur_inst.interactable = _cur_cell.vars.interactable
+					_cur_inst.stop = _cur_cell.vars.stop
+					_cur_inst.moveable = _cur_cell.vars.moveable
+					_cur_inst.sunk = _cur_cell.vars.sunk
+					
+					array_push(_inst_ar, _cur_inst)
 				}
+				
+				global.board[# _x, _y][MAP_DATA.ENTITY] = _inst_ar
 			}
 		}
 	}
 
-    show_debug_message("Board state restored from undo.");
+    //show_debug_message("Board state restored from undo.");
 }
