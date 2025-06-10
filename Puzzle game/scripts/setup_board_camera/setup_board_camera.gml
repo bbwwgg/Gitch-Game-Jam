@@ -1,8 +1,10 @@
 function setup_board_camera(){
 	
 	//Find common factor between the width and height and set the corresponding margins
-	var board_width = ((global.board_width + global.board_height) * (MAP_TILE_W * 0.5))
-	var board_height= ((global.board_width + global.board_height) * (MAP_TILE_H * 0.5)) + LARGEST_SPRITE_HEIGHT
+	var board_width = ((global.board_width) * (TILE_SIZE))
+	var board_height= ((global.board_height) * (TILE_SIZE)) + LARGEST_SPRITE_HEIGHT
+
+	
 
 	var _board_margin_width = GUI_MAP_MARGIN / VIEW_WIDTH
 	var _board_margin_top = (GUI_MAP_TOP_MARGIN) / VIEW_HEIGHT

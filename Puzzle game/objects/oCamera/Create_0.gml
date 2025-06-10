@@ -1,8 +1,10 @@
 //Init camera and view
-global.Camera = camera_create_view(0,0 ,VIEW_HEIGHT,VIEW_WIDTH)
+global.Camera = camera_create_view(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
+
 view_enabled = true
 view_visible[0] = true
-view_set_camera(0, global.Camera)
+
+
 
 var _window_w = VIEW_WIDTH
 var _window_h = VIEW_HEIGHT
@@ -32,3 +34,6 @@ x_to = 0
 y_to = 0
 
 lock_to_board  = true
+
+view_set_camera(0, global.Camera)
+

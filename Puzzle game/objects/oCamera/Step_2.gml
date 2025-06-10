@@ -1,5 +1,3 @@
-
-
 if current_width != target_width{
 	var prev_height = current_height
 	var prev_width = current_width
@@ -36,3 +34,4 @@ if lock_to_board{
 
 //show_debug_message([[x,y],[x_to,y_to]])
 camera_set_view_pos(global.Camera, x, y)
+
