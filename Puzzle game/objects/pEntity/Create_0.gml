@@ -3,9 +3,38 @@ stop = true
 moveable = false
 sunk = false
 
+y_offset = 0
+time = 0
+dir = -1
+
+image_speed = 0
+
 function update_pos(){
 	x = xTile*TILE_SIZE + global.camera_margin_width
 	y = yTile*TILE_SIZE + global.camera_margin_height
+	
+	if !sunk{
+		depth = -y
+	}
+	
+	if entity_id = ENITITY.PLAYER{
+		if sprite_index != sPlayerWalk{
+			sprite_index = sPlayerWalk
+			
+			image = 0
+		}else{
+			image ++
+			if image = 3{
+				image = 0	
+			}
+		}
+		
+		
+		image_index = image + dir * 3
+		
+		move_delay = 30	
+
+	}
 }
 
 function fall(){
@@ -13,7 +42,11 @@ function fall(){
 	moveable = false
 	stop = false
 	sunk = true
-	depth = 99
+	depth = 100-y
+	
+	if entity_id = ENITITY.BOX{
+		image_index = 1	
+	}
 }
 
 function interact(){

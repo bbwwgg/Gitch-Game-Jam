@@ -1,1 +1,1 @@
-global.sequence = [3,1,9,2]
+global.luck_system.init([3,1,9,2,3])

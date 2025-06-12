@@ -1,3 +1,36 @@
+enum LEVEL_STATE{
+	ENTER,
+	PLAYING,
+	EXIT
+}
+
+
+
+global.luck_system = {
+    sequence: [],
+    index: 0,
+    last_step: -1,
+    current_value: 0,
+
+    init: function(_sequence) {
+		sequence = _sequence
+    },
+
+    use: function() {
+        var current_step = current_time;
+        if (last_step != current_step) {
+            last_step = current_step;
+            if (index < array_length(sequence)) {
+                current_value = sequence[index];
+                index += 1;
+            } else {
+                current_value = 0;
+            }
+        }
+        return current_value;
+    }
+}
+
 square_size = TILE_SIZE
 var base_lay_id = layer_get_id("BaseTile");
 var entity_lay_id = layer_get_id("Entities");
@@ -69,6 +102,13 @@ base_yOffset = global.camera_margin_height
 
 
 
+state = LEVEL_STATE.ENTER
+
+animation_timer = 60
+time_per_segment = 15
+time = 0
+
+
 
 global.board_state = []
 
@@ -100,7 +140,9 @@ function save_board_state() {
                                     interactable: nested_item.interactable,
                                     stop: nested_item.stop,
                                     moveable: nested_item.moveable,
-                                    sunk: nested_item.sunk
+                                    sunk: nested_item.sunk,
+									visible : nested_item.visible,
+									image_index : nested_item.image_index
                                 }
                             };
                         } else {
@@ -119,7 +161,12 @@ function save_board_state() {
         }
     }
 
-    array_push(global.board_state, snapshot);
+	var world_snapshot = {
+		luck : global.luck_system.index,
+		board : snapshot
+	}
+
+    array_push(global.board_state, world_snapshot);
 }
 
 
@@ -132,8 +179,12 @@ function undo_board_state() {
     }
 
     // Pop the last saved state snapshot
-    var snapshot = array_pop(global.board_state);
-
+    var world_snapshot = array_pop(global.board_state);
+    var snapshot = world_snapshot.board
+	
+	//Undo the luck
+	global.luck_system.index = world_snapshot.luck
+	
     // Replace global.board with snapshot
     // First free the current grid
     if (ds_exists(global.board, ds_type_grid)) {
@@ -164,7 +215,9 @@ function undo_board_state() {
 					_cur_inst.stop = _cur_cell.vars.stop
 					_cur_inst.moveable = _cur_cell.vars.moveable
 					_cur_inst.sunk = _cur_cell.vars.sunk
-					
+					_cur_inst.visible = _cur_cell.vars.visible
+					_cur_inst.image_index = _cur_cell.vars.image_index
+
 					array_push(_inst_ar, _cur_inst)
 				}
 				

@@ -5,7 +5,7 @@
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Puzzle game",
-    "path": "Puzzle game.yyp",
+    "name": "Entity",
+    "path": "folders/Entity.yy",
   },
 }

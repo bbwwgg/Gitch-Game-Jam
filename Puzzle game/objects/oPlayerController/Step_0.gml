@@ -39,7 +39,19 @@ if dir != -1{
 	for(var i = 0; i < player_count; i ++){
 		var _player = player_instance[i]
 		if player_instance[i].interactable{
-			move(player_instance[i], dir)
+			player_instance[i].dir = dir
+			if move(player_instance[i], dir){
+				with player_instance[i]{
+					var _dustx = lengthdir_x(TILE_SIZE,dir*90)
+					var _dusty = lengthdir_y(TILE_SIZE,dir*90)
+					
+					with instance_create_depth(x-_dustx+TILE_SIZE/2,y-_dusty+TILE_SIZE/2,-y-_dusty,oEffect){
+						sprite_index = sDust1	
+						hsp = -_dusty*0.01
+						vsp = -_dustx*0.01
+					}
+				}
+			}
 		}
 	}
 }

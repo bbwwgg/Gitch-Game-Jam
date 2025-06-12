@@ -3,11 +3,13 @@ function init_entity_details(_id){
 		case ENITITY.PLAYER:
 			interactable = true
 			stop = false
-			sprite_index = sPlayer
+			sprite_index = sPlayerIdle
 		break
 		case ENITITY.FLAG:
-			stop = false
+			stop = true
 			moveable = false
+			interactable = true
+			interact_script = interact_flag
 			sprite_index = sFlag
 		break
 		case ENITITY.BOX:
@@ -19,7 +21,8 @@ function init_entity_details(_id){
 			interactable = true
 			stop = true
 			interact_script = interact_lock
-			sprite_index = sPlayer
+			sprite_index = sLock
+			image_speed = 0
 		break
 	}
 	

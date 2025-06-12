@@ -1,4 +1,14 @@
 function interact_lock(){
-	moveable = true
-	interactable = false
+	
+	var _luck = global.luck_system.use()
+	
+	if _luck <= 4{
+		moveable = true
+		interactable = false
+	}else{
+		interactable = false
+		stop = false
+		visible = false
+	}
+	
 }
