@@ -10,8 +10,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Controllers",
-    "path": "folders/Controllers.yy",
+    "name": "Level Selection",
+    "path": "folders/Level Selection.yy",
   },
   "parentObjectId": null,
   "persistent": false,

@@ -1,3 +1,7 @@
+if !player_input{
+	return
+}
+
 if  keyboard_check_pressed(ord("Z")){
 	oBoardController.undo_board_state()
 }

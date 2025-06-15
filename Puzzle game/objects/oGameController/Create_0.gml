@@ -4,3 +4,6 @@ map1 = {
 
 
 level_selecton = [ map1 ]
+
+
+completed_level = false

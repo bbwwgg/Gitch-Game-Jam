@@ -14,7 +14,7 @@
     {"name":"sDust1","order":25,"path":"sprites/sDust1/sDust1.yy",},
     {"name":"setup_map_camera","order":3,"path":"scripts/setup_map_camera/setup_map_camera.yy",},
     {"name":"oTransition","order":1,"path":"objects/oTransition/oTransition.yy",},
-    {"name":"oLevelSelectionController","order":4,"path":"objects/oLevelSelectionController/oLevelSelectionController.yy",},
+    {"name":"oLevelSelectionController","order":3,"path":"objects/oLevelSelectionController/oLevelSelectionController.yy",},
     {"name":"sObjects_Tileset","order":3,"path":"tilesets/sObjects_Tileset/sObjects_Tileset.yy",},
     {"name":"sGrass_tile","order":1,"path":"sprites/sGrass_tile/sGrass_tile.yy",},
     {"name":"level_lock2","order":5,"path":"rooms/level_lock2/level_lock2.yy",},

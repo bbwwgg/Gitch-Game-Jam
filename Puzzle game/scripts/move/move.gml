@@ -70,12 +70,23 @@ function move(_inst, _dir){
 				}
 			}
 			
-			if _cur_next_ent.interactable and _inst.entity_id = ENITITY.PLAYER{
-				_cur_next_ent.interact()
-			}
-			
-			if _cur_next_ent.stop{
-				return false	
+			if _inst.entity_id = ENITITY.PLAYER{
+				
+
+				
+				if _cur_next_ent.interactable{
+					_cur_next_ent.interact()
+				}
+				
+				if _cur_next_ent.stop and _cur_next_ent.entity_id != ENITITY.FLAG{
+					return false
+				}
+				
+
+			}else{
+				if _cur_next_ent.stop{
+					return false	
+				}
 			}
 		}	
 	}

@@ -10,7 +10,7 @@ if h != 0 or v != 0{
 	if _new_ypos < 0 || _new_ypos >= board_height{ return }
 	
 	if current_map[# _new_xpos, _new_ypos] != -1{
-		if current_map[# _new_xpos, _new_ypos].active = 0{
+		if current_map[# _new_xpos, _new_ypos].active = true{
 			cursor_pos_x = _new_xpos
 			cursor_pos_y = _new_ypos
 			
@@ -26,6 +26,8 @@ if h != 0 or v != 0{
 
 
 if keyboard_check_pressed(vk_space){
+	oGameController.saved_cursor_pos = [cursor_pos_x,cursor_pos_y]
+	oGameController.completed_level = false
 	transition(level_lock1)	
 }
 
