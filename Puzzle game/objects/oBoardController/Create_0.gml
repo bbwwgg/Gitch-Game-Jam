@@ -55,9 +55,6 @@ grid_width = global.board_width
 global.board = ds_grid_create(grid_width,grid_height)
 
 //Camera
-
-if !instance_exists(oCamera){ instance_create_depth(0,0,0,oCamera) }
-
 setup_board_camera()
 
 

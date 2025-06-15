@@ -1,3 +1,3 @@
 function interact_flag(){
-	room_goto_next()
+	transition(level_select)
 }

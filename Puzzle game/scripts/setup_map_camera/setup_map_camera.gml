@@ -1,8 +1,10 @@
-function setup_board_camera(){
+function setup_map_camera(){
 	
 	//Find common factor between the width and height and set the corresponding margins
-	var board_width = ((global.board_width) * (TILE_SIZE))
-	var board_height= ((global.board_height) * (TILE_SIZE)) + LARGEST_SPRITE_HEIGHT
+	
+	
+	var board_width = (ds_grid_width(current_map)*sprite_get_width(sLevel))
+	var board_height= (ds_grid_height(current_map)*sprite_get_height(sLevel))
 
 	
 
@@ -11,7 +13,7 @@ function setup_board_camera(){
 	var _board_margin_bot = (GUI_MAP_BOT_MARGIN) / VIEW_HEIGHT 
 
 
-	var ratio = clamp(max((board_width *(1+_board_margin_width*2)) div CAMERA_WIDTH_RATIO,(board_height *(1+_board_margin_top+_board_margin_bot)) div CAMERA_HEIGHT_RATIO),CAMERA_SMALLEST_FACTOR,VIEW_SIZE_RATIO) + 1
+	var ratio = clamp(max((board_width) div CAMERA_WIDTH_RATIO,(board_height) div CAMERA_HEIGHT_RATIO),CAMERA_SMALLEST_FACTOR,VIEW_SIZE_RATIO) + 1
 
 
 	var cam_width = CAMERA_WIDTH_RATIO * ratio 
@@ -30,16 +32,18 @@ function setup_board_camera(){
 	global.camera_max_width = cam_width
 	global.camera_max_height = cam_height
 	
+	
+	
 	with oCamera{
 		target_width  =	global.camera_max_width
 		target_height = global.camera_max_height
 		
 		current_width =	global.camera_max_width
 		current_height= global.camera_max_height
-				
-		view_set_camera(0, global.Camera)
 
+		view_set_camera(0, global.Camera)
 	}
+
 
 	
 
