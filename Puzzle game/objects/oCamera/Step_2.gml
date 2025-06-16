@@ -32,6 +32,18 @@ if lock_to_board{
 	y_to = clamp(y_to,0,global.camera_max_height-current_height)
 }
 
+// Camera shake update
+if (shake_strength > 0.01) {
+	shake_offset_x = random_range(-shake_strength, shake_strength);
+	shake_offset_y = random_range(-shake_strength, shake_strength);
+	
+	// Apply deca
+	shake_strength *= shake_decay;
+} else {
+	shake_offset_x = 0;
+	shake_offset_y = 0;
+}
+
 //show_debug_message([[x,y],[x_to,y_to]])
-camera_set_view_pos(global.Camera, x, y)
+camera_set_view_pos(global.Camera, x+shake_offset_x, y+shake_offset_y)
 

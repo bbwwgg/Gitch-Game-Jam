@@ -2,9 +2,9 @@
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
   "name": "sGrass_base_tile",
-  "bbox_bottom": 95,
+  "bbox_bottom": 191,
   "bbox_left": 0,
-  "bbox_right": 127,
+  "bbox_right": 255,
   "bbox_top": 0,
   "bboxMode": 0,
   "collisionKind": 1,
@@ -13,14 +13,14 @@
   "edgeFiltering": false,
   "For3D": false,
   "frames": [
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"246b48ca-12f4-4c89-ab0b-f09f91e651c6",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"157d4ae7-1f6c-43eb-856e-741b489cb3e9",},
   ],
-  "gridX": 0,
-  "gridY": 0,
-  "height": 96,
+  "gridX": 16,
+  "gridY": 16,
+  "height": 192,
   "HTile": false,
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"ad7e4444-3ca0-4b65-987f-1671b9a27082","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
+    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"1d367685-e264-4fda-b3e8-5635be90ffba","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
   ],
   "nineSlice": null,
   "origin": 0,
@@ -54,7 +54,7 @@
     "timeUnits": 1,
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"246b48ca-12f4-4c89-ab0b-f09f91e651c6","path":"sprites/sGrass_base_tile/sGrass_base_tile.yy",},},},"Disabled":false,"id":"626d880b-9f56-4b46-bee8-4f21210921b0","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"157d4ae7-1f6c-43eb-856e-741b489cb3e9","path":"sprites/sGrass_base_tile/sGrass_base_tile.yy",},},},"Disabled":false,"id":"4afcd9fe-caa3-413b-b0b5-b48a29f1f20d","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,
@@ -70,5 +70,5 @@
   },
   "type": 0,
   "VTile": false,
-  "width": 128,
+  "width": 256,
 }

@@ -11,8 +11,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Controllers",
-    "path": "folders/Controllers.yy",
+    "name": "Level",
+    "path": "folders/Controllers/Level.yy",
   },
   "parentObjectId": null,
   "persistent": false,

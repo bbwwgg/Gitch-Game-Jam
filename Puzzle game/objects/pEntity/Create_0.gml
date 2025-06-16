@@ -3,6 +3,8 @@ stop = true
 moveable = false
 sunk = false
 
+draw = true
+
 y_offset = 0
 time = 0
 dir = -1
@@ -15,6 +17,10 @@ function update_pos(){
 	
 	if !sunk{
 		depth = -y
+		
+		if  entity_id = ENITITY.FLAG{
+			depth += 16
+		}
 	}
 	
 	if entity_id = ENITITY.PLAYER{
@@ -44,9 +50,19 @@ function fall(){
 	sunk = true
 	depth = 100-y
 	
-	if entity_id = ENITITY.BOX{
-		image_index = 1	
+	switch entity_id{
+		default:
+			image_index ++	
+		break
+		case ENITITY.LOCK:
+			image_index = 2
+		break
+		
+		case ENITITY.PLAYER:
+			visible = false
+		break
 	}
+
 }
 
 function interact(){

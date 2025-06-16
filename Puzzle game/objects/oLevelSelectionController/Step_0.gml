@@ -28,6 +28,11 @@ if h != 0 or v != 0{
 if keyboard_check_pressed(vk_space){
 	oGameController.saved_cursor_pos = [cursor_pos_x,cursor_pos_y]
 	oGameController.completed_level = false
-	transition(level_lock1)	
+	
+	var _dest = current_map[# cursor_pos_x, cursor_pos_y].dest
+	
+	if _dest = noone {_dest = level_lock1}
+
+	transition(_dest)	
 }
 

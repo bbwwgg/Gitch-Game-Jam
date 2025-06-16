@@ -1,0 +1,35 @@
+number_of_orbiters = 6
+orbit_radius_x = 0
+orbit_radius_y = 0
+
+orbit_radius_x_max = 40
+orbit_radius_y_max = 20
+
+time_to = 25
+time = 0
+
+rise_time = 0
+rise_time_to = 30
+delay = 5
+
+explode = false
+
+
+
+orbit_speed = 2
+
+center_x = x
+center_y = y
+
+y_offset =0 
+
+angle_offset = 0
+
+orbit_sprite = sWisp
+
+image_speed = 0
+image_index = 3
+
+stop = true
+
+depth = -999

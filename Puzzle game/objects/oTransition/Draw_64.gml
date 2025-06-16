@@ -6,7 +6,12 @@ if state = TRANSITION_STATE.ENTER{
 	}else{
 		//Do something (room restart or new room)
 		
-		room_goto(room_to)
+		if room_to != noone{
+			room_goto(room_to)
+		}else{
+			oPlayerController.player_input = true
+			oBoardController.undo_board_state()
+		}
 		
 		state = TRANSITION_STATE.EXIT
 		time = 0
@@ -24,10 +29,10 @@ if state = TRANSITION_STATE.ENTER{
 
 
 draw_set_color(c_black)
-draw_rectangle(0,VIEW_HEIGHT,VIEW_WIDTH,VIEW_HEIGHT-height,false)
-draw_rectangle(0,0,VIEW_WIDTH,height,false)
+draw_rectangle(0,VIEW_HEIGHT,VIEW_WIDTH,VIEW_HEIGHT-round(height),false)
+draw_rectangle(0,0,VIEW_WIDTH,round(height),false)
 
-draw_rectangle(VIEW_WIDTH,0,VIEW_WIDTH-width,VIEW_HEIGHT,false)
-draw_rectangle(0,0,width,VIEW_HEIGHT,false)
+draw_rectangle(VIEW_WIDTH,0,VIEW_WIDTH-round(width),VIEW_HEIGHT,false)
+draw_rectangle(0,0,round(width),VIEW_HEIGHT,false)
 
 draw_set_color(c_white)

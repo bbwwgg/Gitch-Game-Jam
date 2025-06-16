@@ -1,6 +1,8 @@
 dest = noone
-active = false
 level_number = 1
+
+active = false
+
 
 image_speed = 0
 

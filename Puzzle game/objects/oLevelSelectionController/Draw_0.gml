@@ -22,9 +22,6 @@ if progress <= 1{
 	progress += 0.05
 	cursor_x = ease_overshoot(start_x, dest_x, progress);
 	cursor_y = ease_overshoot(start_y, dest_y, progress);
-	//show_message([cursor_x,dest_x])
-	
-	//show_message(progress)
 }
 
 draw_sprite(sCursor,0, x_offset + cursor_x, y_offset + cursor_y)

@@ -1,24 +1,27 @@
-
 if sunk{
 	y_offset = round(0.75*sin(time*0.05)+2)	
 	time ++
 }
 
+
+
+
 switch(entity_id){
 
 	case ENITITY.LOCK:
-		if !interactable{
-			image_index = 1
-		}else{
-			image_index = 0
-		}
-		draw_sprite(sprite_index,image_index,x,y+y_offset)
+
+		draw_sprite_ext(sprite_index,image_index,x,y+y_offset,1,1,0,c_white,image_alpha)
+	break
+
+	case ENITITY.WHISP:
+		image_index = dir
+		y_offset = round(0.75*sin(time*0.05)+2)	
+		time ++
+		draw_sprite_ext(sprite_index,image_index,x,y+y_offset,1,1,0,c_white,image_alpha)
 	break
 
 	case ENITITY.PLAYER:
-		
-		
-		
+			
 		if move_delay > 0{
 			move_delay --
 		}else{
@@ -27,7 +30,6 @@ switch(entity_id){
 		}
 
 	default:
-		draw_sprite(sprite_index,image_index,x,y+y_offset)
+		draw_sprite_ext(sprite_index,image_index,x,y+y_offset,1,1,0,c_white,image_alpha)
 	break
 }
-

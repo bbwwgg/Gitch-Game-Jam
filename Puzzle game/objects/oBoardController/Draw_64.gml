@@ -7,8 +7,6 @@ var _height = GUI_SEQUENCE_HEIGHT
 draw_rectangle(x_offset,y_offset,x_offset+_width,y_offset+_height,true)
 
 
-//TODO THIS WILL LOOK UGLY, MOVE TO TOP OF SCREEN
-
 //Sequence
 var _sequence_len = array_length(global.luck_system.sequence)
 

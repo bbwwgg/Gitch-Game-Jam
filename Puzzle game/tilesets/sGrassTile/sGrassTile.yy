@@ -3,7 +3,7 @@
   "resourceVersion": "1.0",
   "name": "sGrassTile",
   "autoTileSets": [
-    {"resourceType":"GMAutoTileSet","resourceVersion":"1.0","name":"autotile_2","closed_edge":false,"tiles":[
+    {"resourceType":"GMAutoTileSet","resourceVersion":"1.0","name":"autotile_1","closed_edge":false,"tiles":[
         1,
         2,
         3,
@@ -130,10 +130,10 @@
   },
   "tileAnimationFrames": [],
   "tileAnimationSpeed": 15.0,
-  "tileHeight": 16,
+  "tileHeight": 32,
   "tilehsep": 0,
   "tilevsep": 0,
-  "tileWidth": 16,
+  "tileWidth": 32,
   "tilexoff": 0,
   "tileyoff": 0,
 }

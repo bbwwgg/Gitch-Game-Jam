@@ -35,5 +35,11 @@ y_to = 0
 
 lock_to_board  = true
 
+//Camera shake 
+shake_strength = 0;     
+shake_decay = 0.9;     
+shake_offset_x = 0;     
+shake_offset_y = 0;    
+
 view_set_camera(0, global.Camera)
 

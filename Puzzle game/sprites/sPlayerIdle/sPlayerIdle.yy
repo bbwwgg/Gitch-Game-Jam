@@ -28,8 +28,8 @@
   "nineSlice": null,
   "origin": 9,
   "parent": {
-    "name": "Entity",
-    "path": "folders/Entity.yy",
+    "name": "sprites",
+    "path": "folders/Entity/sprites.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {
@@ -65,8 +65,8 @@
     ],
     "visibleRange": null,
     "volume": 1.0,
-    "xorigin": 1,
-    "yorigin": 6,
+    "xorigin": -8,
+    "yorigin": 0,
   },
   "swatchColours": null,
   "swfPrecision": 2.525,

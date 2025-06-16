@@ -32,6 +32,7 @@ global.luck_system = {
 }
 
 square_size = TILE_SIZE
+
 var base_lay_id = layer_get_id("BaseTile");
 var entity_lay_id = layer_get_id("Entities");
 var object_lay_id = layer_get_id("Objects");
@@ -102,7 +103,7 @@ base_yOffset = global.camera_margin_height
 state = LEVEL_STATE.ENTER
 
 animation_timer = 60
-time_per_segment = 15
+time_per_segment = 20
 time = 0
 
 
@@ -166,7 +167,14 @@ function save_board_state() {
     array_push(global.board_state, world_snapshot);
 }
 
-
+function reset_board(){
+	
+	transition(noone)
+	
+	while array_length(global.board_state) > 1{
+		ds_grid_destroy(array_pop(global.board_state).board)
+	}
+}
 
 // Similarly for undo:
 function undo_board_state() {

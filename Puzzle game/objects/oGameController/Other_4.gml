@@ -51,7 +51,7 @@ for(var i=0; i < array_length(level_selecton); i ++){
 				var _level_number = inst.level_number
 				
 				var _level_info = {
-					active : false,
+					active : true, //CHANGE 
 					complete : false,
 					level_number : _level_number,
 					dest : inst.dest

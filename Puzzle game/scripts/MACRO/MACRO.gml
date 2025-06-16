@@ -1,4 +1,4 @@
-#macro TILE_SIZE 16
+#macro TILE_SIZE 32
 
 
 
@@ -15,5 +15,8 @@ enum ENITITY{
 	FLAG,
 	BOX,
 	LOCK,
+	STOP_LOCK,
+	WHISP,
+	LUCK_BLOCK,
 	COUNT
 }
