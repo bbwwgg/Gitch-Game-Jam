@@ -97,8 +97,8 @@ function player_on_board(){
 					
 						with instance_create_depth(x-_dustx+TILE_SIZE/2,y-_dusty+TILE_SIZE/2,-y-_dusty,oEffect){
 							sprite_index = sDust1	
-							hsp = -_dusty*0.01
-							vsp = -_dustx*0.01
+							hsp = -_dustx*0.01
+							vsp = -_dusty*0.01
 						}
 					}
 				}

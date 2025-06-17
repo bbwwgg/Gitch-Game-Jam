@@ -51,15 +51,17 @@ for(var i=0; i < array_length(level_selecton); i ++){
 				var _level_number = inst.level_number
 				
 				var _level_info = {
-					active : true, //CHANGE 
+					active : DEBUG_MODE, //CHANGE 
 					complete : false,
 					level_number : _level_number,
 					dest : inst.dest
 				}
 				
-				if _level_number < starting_level{
-					starting_level = _level_number
-					starting_location = [grid_x,grid_y]
+				if !is_string(_level_number){
+					if _level_number < starting_level{
+						starting_level = _level_number
+						starting_location = [grid_x,grid_y]
+					}
 				}
 				
 				ds_grid_set(level_grid, grid_x, grid_y, _level_info)
@@ -74,6 +76,7 @@ for(var i=0; i < array_length(level_selecton); i ++){
 			level_grid[# starting_location[0], starting_location[1]].active = true
 			
 			saved_cursor_pos = starting_location
+			
 			
 		}else{
 

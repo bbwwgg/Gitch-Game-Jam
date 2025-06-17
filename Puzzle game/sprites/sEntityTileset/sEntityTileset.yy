@@ -2,7 +2,7 @@
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
   "name": "sEntityTileset",
-  "bbox_bottom": 63,
+  "bbox_bottom": 95,
   "bbox_left": 0,
   "bbox_right": 127,
   "bbox_top": 0,
@@ -25,8 +25,8 @@
   "nineSlice": null,
   "origin": 0,
   "parent": {
-    "name": "Objects + entities",
-    "path": "folders/tilesets/Objects + entities.yy",
+    "name": "sprites",
+    "path": "folders/Entity/sprites.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

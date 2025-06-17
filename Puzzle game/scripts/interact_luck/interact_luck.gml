@@ -1,8 +1,18 @@
 function interact_luck(){
 	
-	var _luck = global.luck_system.use()
-	interactable = false
 	
-	luck = _luck
-	
+	if 	interacting_inst.entity_id != ENITITY.PLAYER{
+		moveable = true
+	}else{
+		if entity_var = -1{
+			var _luck = global.luck_system.take()
+			
+			if is_array(_luck) image_index ++
+			
+			entity_var = _luck
+			moveable = false
+		}else{
+			moveable = true
+		}
+	}
 }

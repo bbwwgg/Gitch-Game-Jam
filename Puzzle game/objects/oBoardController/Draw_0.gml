@@ -49,7 +49,6 @@ for(var i = 0; i < grid_height; i ++){
 		draw_sprite_ext(sGrass_tile,global.board[# j, i][MAP_DATA.TILE],_x,_y,1,1,0,c_white,_alpha)
 		
 		var _obj = global.board[# j, i][MAP_DATA.OBJECT]
-		
 
 		if _obj != noone{
 			draw_sprite_ext(sHedge,_obj,_x,_y,1,1,0,c_white,_alpha)

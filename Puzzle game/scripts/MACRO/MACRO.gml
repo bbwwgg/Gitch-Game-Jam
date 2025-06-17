@@ -1,12 +1,19 @@
 #macro TILE_SIZE 32
+#macro DEBUG_MODE true
 
-
+#macro GUI_HUD_INTERIOR_WIDTH 105
+#macro GUI_HUD_INTERIOR_HEIGHT 14
 
 enum MAP_DATA{
 	ENTITY, //Enity on tile.
 	OBJECT, // object on tile
 	TILE, //sprite for ground
 	COUNT	
+}
+
+enum SEQUENCE_NUM_TYPE{
+	NONE,
+	REPEAT
 }
 
 enum ENITITY{
@@ -18,5 +25,9 @@ enum ENITITY{
 	STOP_LOCK,
 	WHISP,
 	LUCK_BLOCK,
+	PUSH_RIGHT,
+	PUSH_UP,
+	PUSH_LEFT,
+	PUSH_DOWN,
 	COUNT
 }

@@ -1,52 +1,44 @@
 function interact_lock(){
 	
-	var _luck = global.luck_system.use()
-	
-	if _luck <= 4{
+	if entity_var != -1{
 		moveable = true
 		interactable = false
-		image_index ++
-		
-		camera_shake(3, 0.65) 
-		
-	}else{
-		interactable = false
-		stop = false
-		visible = false
-		
-		var lock_created = false
-		
-		camera_shake(6, 0.75) 
-		
-		repeat(irandom_range(4,6)){
-			with instance_create_layer(x+TILE_SIZE/2,y+TILE_SIZE/2,"effects", oEffect){
-				sprite_index = sDoorPart
-				
-				depth = -999
-				
-				image_index = irandom_range(0,2)
-				
-				
-				
-				image_speed = 0
-				hsp = random_range(-1.5,1.5)
-				vsp = random_range(-1,-3)
-				
-				angle_change = (hsp+vsp)*2
-				
-				if !lock_created{
-					lock_created = true
-					image_index = 3
-					angle_change = (hsp+vsp)*2
-				}
-				
-				vsp_change = 0.12
-				
-				alpha_change = 0.02
-				
-				alarm[0] = 60
-			}
-		}
+		return
 	}
 	
+	if 	interacting_inst.entity_id != ENITITY.PLAYER and interacting_inst.entity_id != ENITITY.LUCK_BLOCK { return}
+	
+
+		var _luck;
+		if interacting_inst.entity_id = ENITITY.LUCK_BLOCK{
+			_luck = interacting_inst.entity_var
+			
+			if _luck = -1{return}
+			
+			if is_array(_luck){
+				
+				if _luck[1] != SEQUENCE_NUM_TYPE.REPEAT{
+					interacting_inst.explode()
+				}
+				
+				_luck = _luck[0]
+			}else{
+				interacting_inst.explode()
+			}
+
+			
+
+			
+		}else{
+			_luck = global.luck_system.use()
+		}
+		
+		entity_var = _luck
+		if _luck <= 4{
+			image_index ++
+			camera_shake(3, 0.65) 
+		
+		}else{
+			explode()
+		}
 }

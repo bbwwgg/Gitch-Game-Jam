@@ -6,6 +6,7 @@ enum LEVEL_STATE{
 
 
 
+
 global.luck_system = {
     sequence: [],
     index: 0,
@@ -14,6 +15,10 @@ global.luck_system = {
 
     init: function(_sequence) {
 		sequence = _sequence
+		
+		if !is_array(array_last(sequence)){
+			array_push(sequence,[0,SEQUENCE_NUM_TYPE.REPEAT])
+		}
     },
 
     use: function() {
@@ -21,15 +26,55 @@ global.luck_system = {
         if (last_step != current_step) {
             last_step = current_step;
             if (index < array_length(sequence)) {
-                current_value = sequence[index];
-                index += 1;
+				var _cur_value = sequence[index]
+				if is_array(_cur_value){
+					
+					if _cur_value[1] != SEQUENCE_NUM_TYPE.REPEAT{
+						index += 1	
+					}
+					_cur_value = _cur_value[0]
+
+				}else{
+					index += 1	
+				}
+				
+                current_value = _cur_value;
             } else {
+				
                 current_value = 0;
-            }
+            
+			}
+        }
+		
+		
+		if is_array(current_value){
+			return current_value[0]	
+		}
+		
+        return current_value;
+    },
+	
+	//Will always go to next
+    take: function() {
+        var current_step = current_time;
+        if (last_step != current_step) {
+            last_step = current_step;
+            if (index < array_length(sequence) - 1) {
+				var _cur_value = sequence[index]
+				index += 1
+                current_value = _cur_value;
+            } else {
+				current_value = sequence[index];
+			}
         }
         return current_value;
     }
 }
+
+luck_cursor_x =  0
+luck_cursor_x_to = 0
+luck_cursor_progress = 1
+luck_cursor_x_start = 0
 
 square_size = TILE_SIZE
 
@@ -140,7 +185,9 @@ function save_board_state() {
                                     moveable: nested_item.moveable,
                                     sunk: nested_item.sunk,
 									visible : nested_item.visible,
-									image_index : nested_item.image_index
+									image_index : nested_item.image_index,
+									depth : nested_item.depth,
+									entity_var : nested_item.entity_var
                                 }
                             };
                         } else {
@@ -222,7 +269,8 @@ function undo_board_state() {
 					_cur_inst.sunk = _cur_cell.vars.sunk
 					_cur_inst.visible = _cur_cell.vars.visible
 					_cur_inst.image_index = _cur_cell.vars.image_index
-
+					_cur_inst.depth = _cur_cell.vars.depth
+					_cur_inst.entity_var = _cur_cell.vars.entity_var
 					array_push(_inst_ar, _cur_inst)
 				}
 				

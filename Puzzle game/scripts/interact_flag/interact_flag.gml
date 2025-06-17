@@ -1,5 +1,6 @@
 function interact_flag(){
 
+	if 	interacting_inst.entity_id != ENITITY.PLAYER{ return}
 	
 	var _count = instance_number(pEntity)
 

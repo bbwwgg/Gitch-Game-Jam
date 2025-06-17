@@ -1,3 +1,7 @@
+draw_set_valign(fa_middle)
+draw_set_halign(fa_center)
+draw_set_font(fntMain)
+
 for (var _y = 0; _y < board_height; _y++) {
 	for (var _x = 0; _x < board_width; _x++) {
 		var val = ds_grid_get(current_map, _x, _y)
@@ -6,13 +10,16 @@ for (var _y = 0; _y < board_height; _y++) {
 			if val.active = true{
 				draw_sprite(sLevel, val.complete, x_offset + _x * tile_width, y_offset + _y * tile_height)
 			
-				var _level_num = string(val.level_number)
+				
+				var _level_num = val.level_number
 			
-				if string_length(_level_num) < 2{
-					_level_num = "0"+_level_num
+				if !is_string(_level_num){
+					if string_length(_level_num) < 2{
+						_level_num = "0"+string(_level_num)
+					}
 				}
 			
-				draw_text( x_offset + _x * tile_width, y_offset + _y * tile_height,_level_num)
+				draw_text( x_offset + _x * tile_width + tile_width/2, y_offset + 2+ _y * tile_height+ tile_height/2,_level_num)
 			}
 		}
 	}

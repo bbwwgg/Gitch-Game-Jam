@@ -9,6 +9,9 @@ function move(_inst, _dir){
 
 	var _start_x = _inst.xTile
 	var _start_y = _inst.yTile
+	
+	_inst.dir = _dir
+	
 	//show_message([_start_x,_start_y])
 	var _end_x = _start_x
 	var _end_y = _start_y
@@ -55,6 +58,14 @@ function move(_inst, _dir){
 			
 			var _cur_next_ent = _next_ent[i]
 			
+			if _cur_next_ent.interactable{
+				var _result = _cur_next_ent.interact(_inst)
+				if _cur_next_ent.sprite_index = sPush{
+					return _result	
+				}
+			}
+				
+			
 			if _cur_next_ent.moveable{
 				if move(_cur_next_ent,_dir){
 					var _updated_next_square = global.board[# _end_x, _end_y]
@@ -70,14 +81,8 @@ function move(_inst, _dir){
 				}
 			}
 			
-			if _inst.entity_id = ENITITY.PLAYER{
-				
-
-				
-				if _cur_next_ent.interactable{
-					_cur_next_ent.interact()
-				}
-				
+			if _inst.entity_id = ENITITY.PLAYER{				
+			
 				if _cur_next_ent.stop and _cur_next_ent.entity_id != ENITITY.FLAG{
 					return false
 				}

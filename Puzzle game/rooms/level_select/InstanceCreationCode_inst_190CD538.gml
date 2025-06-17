@@ -1,2 +1,2 @@
-dest = level_lock1
-level_number = 5
+dest = level_intro4
+level_number = 4
