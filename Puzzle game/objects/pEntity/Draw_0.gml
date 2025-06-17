@@ -43,7 +43,18 @@ switch(entity_id){
 		time ++
 		draw_sprite_ext(sprite_index,image_index,x,y+y_offset,1,1,0,c_white,image_alpha)
 	break
+	case ENITITY.PUSH_RIGHT:
+	case ENITITY.PUSH_UP:
+	case ENITITY.PUSH_LEFT:
+	case ENITITY.PUSH_DOWN:
+		time ++
+		
+		if xscale != 1{ xscale = lerp(xscale,1,0.25)}
+		if yscale != 1{ yscale = lerp(yscale,1,0.25)}
 
+		
+		draw_sprite_ext(sprite_index,image_index,x+16,y+13+y_offset,xscale,yscale,0,c_white,image_alpha)
+	break
 	case ENITITY.PLAYER:
 			
 		if move_delay > 0{

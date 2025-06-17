@@ -67,6 +67,14 @@ function interact_push() {
 
 	global.board[# xTile, yTile][MAP_DATA.ENTITY][array_length(global.board[# xTile, yTile][MAP_DATA.ENTITY])] = interacting_inst
 
+	xscale = 0.75
+	yscale = 0.75
+
+	with instance_create_depth(x+TILE_SIZE/2,y+TILE_SIZE/2,-y,oEffect){
+		sprite_index = sDust1	
+		vsp = -0.5
+	}
+	
 
 	var dir =  (4 +image_index + _luck mod 2 * -2 + 1) mod 4
 	

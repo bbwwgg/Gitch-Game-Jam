@@ -3,6 +3,8 @@ stop = true
 moveable = false
 sunk = false
 
+xscale = 1
+yscale = 1
 
 entity_var = 0
 
@@ -64,7 +66,8 @@ function fall(){
 		break
 		
 		case ENITITY.PLAYER:
-			visible = false
+			explode()
+			//visible = false
 		break
 		
 		case ENITITY.LUCK_BLOCK:
@@ -104,6 +107,30 @@ function explode(){
 		}
 		
 		switch entity_id{
+			case ENITITY.PLAYER:
+			
+				var _x = x + lengthdir_x(TILE_SIZE,dir*90)
+				var _y = y + lengthdir_y(TILE_SIZE,dir*90)
+			
+				with instance_create_layer(_x+TILE_SIZE/2,_y+TILE_SIZE/2,"effects", oEffect){
+					sprite_index = sPlayerFace
+				
+					depth = -999
+					
+					image_speed = 0
+					hsp = random_range(-1.5,1.5)
+					vsp = random_range(-1,-3)
+				
+					angle_change = (hsp+vsp)*4
+				
+					vsp_change = 0.12
+				
+					alpha_change = 0.02
+				
+					alarm[0] = 60
+				}
+				instance_create_layer(_x,_y,"effects", oPartPlayer)
+			break
 			case ENITITY.LOCK:
 			var lock_created = false
 		

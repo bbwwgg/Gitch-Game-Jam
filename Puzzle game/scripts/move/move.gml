@@ -125,6 +125,7 @@ function move(_inst, _dir){
 	}
 
 	
+	_prev_ent_count =array_length(global.board[# _start_x, _start_y][MAP_DATA.ENTITY])
 
 	if _prev_ent_count = 1{
 		global.board[# _start_x, _start_y][MAP_DATA.ENTITY] = noone
