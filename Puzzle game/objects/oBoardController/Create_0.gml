@@ -216,10 +216,10 @@ function save_board_state() {
 
 function reset_board(){
 	
-	transition(noone)
-	
-	while array_length(global.board_state) > 1{
-		ds_grid_destroy(array_pop(global.board_state).board)
+	if transition(noone){
+		while array_length(global.board_state) > 1{
+			ds_grid_destroy(array_pop(global.board_state).board)
+		}
 	}
 }
 

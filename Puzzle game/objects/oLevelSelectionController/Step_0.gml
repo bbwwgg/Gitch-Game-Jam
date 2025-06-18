@@ -1,5 +1,6 @@
-var h = keyboard_check_pressed(ord("D"))-keyboard_check_pressed(ord("A")) 
-var v = keyboard_check_pressed(ord("S"))-keyboard_check_pressed(ord("W")) 
+var h = sign(keyboard_check_pressed(ord("D"))-keyboard_check_pressed(ord("A"))+keyboard_check_pressed(vk_right)-keyboard_check_pressed(vk_left))
+var v = sign(keyboard_check_pressed(ord("S"))-keyboard_check_pressed(ord("W"))+keyboard_check_pressed(vk_down)-keyboard_check_pressed(vk_up))
+
 
 if h != 0 or v != 0{
 	
@@ -25,7 +26,7 @@ if h != 0 or v != 0{
 }
 
 
-if keyboard_check_pressed(vk_space){
+if keyboard_check_pressed(vk_space) || keyboard_check_pressed(vk_enter){
 	oGameController.saved_cursor_pos = [cursor_pos_x,cursor_pos_y]
 	oGameController.completed_level = false
 	

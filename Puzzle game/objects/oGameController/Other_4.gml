@@ -25,8 +25,8 @@ for(var i=0; i < array_length(level_selecton); i ++){
 				if (inst.y > max_y) max_y = inst.y
 			}
 
-			var grid_cell_w = sprite_get_width(sLevel)   
-			var grid_cell_h = sprite_get_height(sLevel)
+			var grid_cell_w = sprite_get_width(sLevelPath)   
+			var grid_cell_h = sprite_get_height(sLevelPath)
 
 			// Calculate grid dimensions
 			var grid_w = floor((max_x - min_x) / grid_cell_w) + 1
@@ -127,8 +127,8 @@ for(var i=0; i < array_length(level_selecton); i ++){
 				board_width = ds_grid_width(current_map)
 				board_height= ds_grid_height(current_map)
 				
-				x_offset = (global.camera_max_width - board_width*sprite_get_width(sLevel)) /2
-				y_offset = (global.camera_max_height - board_height*sprite_get_height(sLevel)) /2
+				x_offset = (global.camera_max_width - board_width*sprite_get_width(sLevelPath)) /2
+				y_offset = (global.camera_max_height - board_height*sprite_get_height(sLevelPath)) /2
 				
 				
 				cursor_pos_x = other.saved_cursor_pos[0]
@@ -141,11 +141,33 @@ for(var i=0; i < array_length(level_selecton); i ++){
 			}
 		}
 		
+		
+		tutorial.draw = false
+		
 		break
 		
 	}
 }
 
 if i = array_length(level_selecton){
+	tutorial.draw = true
+
+	with oTutorialController{
+		var _count = instance_number(pEntity)
+
+		for(var _i = 0; _i < _count; _i ++){
+			var _ent_id = instance_find(pEntity,_i).entity_id
+			
+			if entity_index[_ent_id] != -1{
+				if unlocked_tips[entity_index[_ent_id]] = false{
+					unlocked_tips[entity_index[_ent_id]] = true
+					updated_tips = entity_index[_ent_id]
+					switch_state(HELP_STATE.ALERT)
+				}
+			}
+			
+		}
+	}
+
 	setup_board_camera()	
 }

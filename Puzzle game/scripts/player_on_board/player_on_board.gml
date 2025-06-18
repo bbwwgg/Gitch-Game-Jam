@@ -5,12 +5,38 @@ function player_on_board(){
 
 	if  keyboard_check_pressed(ord("Z")){
 		oBoardController.undo_board_state()
+		return
 	}
 
 	if  keyboard_check_pressed(ord("R")){
+		
+		if instance_exists(oTransition){return}
+		
+		
 		oBoardController.reset_board()
+		
 		player_input = false
 		return
+	}
+	
+	if instance_exists(oTutorialController){
+		if !oTutorialController.is_empty(){
+			if keyboard_check_pressed(ord("H")){
+				if instance_exists(oTutorialController){
+					if oTutorialController.state != HELP_STATE.EXIT{
+						oTutorialController.activate()
+						player_input = false
+					}
+				}
+			}
+		
+			if mouse_check_button(mb_left){
+				if oTutorialController.mouse_on(){
+					oTutorialController.activate()
+					player_input = false
+				}
+			}
+		}
 	}
 	
 	if  keyboard_check_pressed((vk_escape)){
@@ -31,8 +57,8 @@ function player_on_board(){
 
 
 
-	var h = keyboard_check_pressed(ord("D"))-keyboard_check_pressed(ord("A")) 
-	var v = keyboard_check_pressed(ord("S"))-keyboard_check_pressed(ord("W")) 
+	var h = sign(keyboard_check_pressed(ord("D"))-keyboard_check_pressed(ord("A"))+keyboard_check_pressed(vk_right)-keyboard_check_pressed(vk_left))
+	var v = sign(keyboard_check_pressed(ord("S"))-keyboard_check_pressed(ord("W"))+keyboard_check_pressed(vk_down)-keyboard_check_pressed(vk_up))
 
 	var dir = -1
 

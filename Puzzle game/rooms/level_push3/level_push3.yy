@@ -20,7 +20,7 @@
 -12,-2147483648,2,0,2,-6,-2147483648,-2,0,
 15,9,0,-2147483648,0,-2147483648,-2147483648,0,0,
 3,0,3,0,0,-2147483648,-2147483648,-3,0,
-4,1,-2147483648,-2147483648,3,-7,-2147483648,2,8,
+4,1,0,0,3,-7,-2147483648,2,8,
 6,-19,-2147483648,],"TileDataFormat":1,},"tilesetId":{"name":"sEntityTiles","path":"tilesets/sEntityTiles/sEntityTiles.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
     {"resourceType":"GMRTileLayer","resourceVersion":"1.1","name":"Objects","depth":400,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"properties":[],"tiles":{"SerialiseHeight":8,"SerialiseWidth":9,"TileCompressedData":[
 -7,0,-2,-2147483648,11,0,36,34,46,

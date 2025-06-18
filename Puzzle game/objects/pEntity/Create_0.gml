@@ -57,6 +57,10 @@ function fall(){
 	sunk = true
 	depth = 100-y
 	
+	var _x = x + lengthdir_x(TILE_SIZE,dir*90)
+	var _y = y + lengthdir_y(TILE_SIZE,dir*90)
+	instance_create_layer(_x,_y,"effects", oPartSplash)
+	
 	switch entity_id{
 		default:
 			image_index ++	

@@ -3,8 +3,8 @@ function setup_map_camera(){
 	//Find common factor between the width and height and set the corresponding margins
 	
 	
-	var board_width = (ds_grid_width(current_map)*sprite_get_width(sLevel))
-	var board_height= (ds_grid_height(current_map)*sprite_get_height(sLevel))
+	var board_width = (ds_grid_width(current_map)*sprite_get_width(sLevelPath))
+	var board_height= (ds_grid_height(current_map)*sprite_get_height(sLevelPath))
 
 	
 
