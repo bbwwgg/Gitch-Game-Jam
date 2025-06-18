@@ -6,3 +6,5 @@ active = false
 
 image_speed = 0
 
+path = false
+

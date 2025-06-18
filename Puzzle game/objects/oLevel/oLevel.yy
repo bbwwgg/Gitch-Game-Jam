@@ -28,8 +28,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "sLevelPath",
-    "path": "sprites/sLevelPath/sLevelPath.yy",
+    "name": "sLevel",
+    "path": "sprites/sLevel/sLevel.yy",
   },
   "spriteMaskId": null,
   "visible": true,

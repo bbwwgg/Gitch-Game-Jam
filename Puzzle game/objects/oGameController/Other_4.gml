@@ -5,9 +5,10 @@ if !instance_exists(oCamera){ instance_create_layer(0,0,"Instances",oCamera) }
 
 for(var i=0; i < array_length(level_selecton); i ++){
 	var _cur_level = level_selecton[i]
+	
 	if _cur_level.room_index = room{
+		var _levels_to_unlock = undefined
 		if (!struct_exists(_cur_level, "levels")) {
-
 			// Get all oLevel instances
 			var inst_count = instance_number(oLevel)
 
@@ -44,30 +45,42 @@ for(var i=0; i < array_length(level_selecton); i ++){
 			var inst = instance_find(oLevel, 0)
 			while inst != noone {
 				
-
 				var grid_x = floor((inst.x - min_x) / grid_cell_w)
 				var grid_y = floor((inst.y - min_y) / grid_cell_h)
 				
-				var _level_number = inst.level_number
+				if (inst.object_index != oLevelPath) {
 				
-				var _level_info = {
-					active : DEBUG_MODE, //CHANGE 
-					complete : false,
-					level_number : _level_number,
-					dest : inst.dest
-				}
+					var _level_number = inst.level_number
 				
-				if !is_string(_level_number){
-					if _level_number < starting_level{
-						starting_level = _level_number
-						starting_location = [grid_x,grid_y]
+					var _level_info = {
+						active : DEBUG_MODE, //CHANGE 
+						complete : false,
+						level_number : _level_number,
+						dest : inst.dest
+					}
+				
+					if !is_string(_level_number){
+						if _level_number < starting_level{
+							starting_level = _level_number
+							starting_location = [grid_x,grid_y]
+						}
+					}
+				}else{
+					var _level_info = {
+						active : DEBUG_MODE
 					}
 				}
 				
 				ds_grid_set(level_grid, grid_x, grid_y, _level_info)
+
 				
 				instance_destroy(inst)
+				
+				
+				
 				inst = instance_find(oLevel, 0)
+				
+				
 			}
 
 			// Store the grid in the struct
@@ -89,30 +102,8 @@ for(var i=0; i < array_length(level_selecton); i ++){
 				
 				if _cur_level.levels[# pos_x, pos_y].complete = false{
 					_cur_level.levels[# pos_x, pos_y].complete = true
-					
-					var _unlock_dir = [[1,0],[-1,0],[0,1],[0,-1]]
-					
-					var _board_width = ds_grid_width(_cur_level.levels)
-					var _board_height= ds_grid_height(_cur_level.levels)
-					
-					for(var i = 0; i < array_length(_unlock_dir); i ++){
-						var _cur_dir = _unlock_dir[i]
-						
-						var _new_xpos = pos_x + _cur_dir[0]
-						var _new_ypos = pos_y + _cur_dir[1]
-						
-						if _new_xpos < 0 or _new_xpos >= _board_width{	continue	}
-						if _new_ypos < 0 or _new_ypos >= _board_height{	continue	}
-						
-						var _new_level = _cur_level.levels[# _new_xpos, _new_ypos] 
-						
-						if _new_level != -1 and _new_level.active = false{
-							//Preform unlock animation
-							_new_level.active = true
-						}
-						
-					}
-					
+										
+					_levels_to_unlock = active_surrounding(_cur_level.levels, pos_x, pos_y)
 				}
 			}
 		}
@@ -120,6 +111,11 @@ for(var i=0; i < array_length(level_selecton); i ++){
 			
 		if !instance_exists(oLevelSelectionController){
 			with instance_create_layer(0,0,"Instances",oLevelSelectionController){
+				if !is_undefined(_levels_to_unlock){
+					state = unlocking_levels
+					levels_to_unlock = _levels_to_unlock
+					time = delay
+				}
 				current_map = _cur_level.levels
 				
 				setup_map_camera()
@@ -161,7 +157,9 @@ if i = array_length(level_selecton){
 			if entity_index[_ent_id] != -1{
 				if unlocked_tips[entity_index[_ent_id]] = false{
 					unlocked_tips[entity_index[_ent_id]] = true
-					updated_tips = entity_index[_ent_id]
+					if updated_tips = noone{
+						updated_tips = entity_index[_ent_id]
+					}
 					switch_state(HELP_STATE.ALERT)
 				}
 			}

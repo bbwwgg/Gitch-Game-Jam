@@ -22,8 +22,8 @@ unlocked_tips = array_create(sprite_get_number(sTutorialReminder), false)
 unlocked_tips[0] = true
 unlocked_tips[1] = true
 
+updated_tips = 1
 
-updated_tips = noone
 
 #macro TUTORIAL_WIDTH VIEW_WIDTH*0.7
 
@@ -54,14 +54,16 @@ y_start = VIEW_HEIGHT+tutorial_h/2
 tutorial_x = x_start
 tutorial_y = y_start
 
-
+first_open = true
 
 move_time = 0
 time_to = 15
 
+arrow_time = 0
+tutorial_angle = 0
 
 function is_empty(){
-	for(var i = 1; i < array_length(unlocked_tips); i ++){
+	for(var i = 2; i < array_length(unlocked_tips); i ++){
 		if unlocked_tips[i] != false{
 			return false	
 		}
@@ -144,7 +146,7 @@ width = sprite_get_width(sBook)*scale
 height = sprite_get_height(sBook)*scale
 
 y_offset = VIEW_HEIGHT-height/2
-x_offset = width
+x_offset = width*0.7
 
 state = HELP_STATE.HIDDEN
 switch_state(HELP_STATE.HIDDEN)

@@ -6,20 +6,24 @@ for (var _y = 0; _y < board_height; _y++) {
 	for (var _x = 0; _x < board_width; _x++) {
 		var val = ds_grid_get(current_map, _x, _y)
 
-		if (val != -1) {
+		if (val != -1) {		
 			if val.active = true{
-				draw_sprite(sLevel, val.complete, x_offset + _x * tile_width, y_offset + _y * tile_height)
+				if struct_exists(val, "level_number" ){
+					draw_sprite(sLevel, val.complete, x_offset + _x * tile_width, y_offset + _y * tile_height)
 			
 				
-				var _level_num = val.level_number
+					var _level_num = val.level_number
 			
-				if !is_string(_level_num){
-					if string_length(_level_num) < 2{
-						_level_num = "0"+string(_level_num)
+					if !is_string(_level_num){
+						if string_length(_level_num) < 2{
+							_level_num = "0"+string(_level_num)
+						}
 					}
-				}
 			
-				draw_text( x_offset + _x * tile_width + tile_width/2, y_offset + 2+ _y * tile_height+ tile_height/2,_level_num)
+					draw_text( x_offset + _x * tile_width + tile_width/2, y_offset + 2+ _y * tile_height+ tile_height/2,_level_num)
+				}else{
+					draw_sprite(sLevelPath, 0, x_offset + _x * tile_width, y_offset + _y * tile_height)					
+				}
 			}
 		}
 	}
@@ -32,3 +36,4 @@ if progress <= 1{
 }
 
 draw_sprite(sCursor,0, x_offset + cursor_x, y_offset + cursor_y)
+

@@ -16,3 +16,12 @@ dest_y = start_y
 progress = 1.05
 
 current_map = noone
+
+state = Player_selecting_level
+
+levels_to_unlock = []
+
+time = 0
+delay = 30
+
+wisps_collected = 0

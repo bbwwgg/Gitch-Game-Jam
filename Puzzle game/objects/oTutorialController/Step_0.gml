@@ -9,11 +9,14 @@ switch (state){
 			while (new_index >= 0 && new_index <= max_page) {
 				if (unlocked_tips[new_index]) {
 					page = new_index;
+					tutorial_angle = h*-7
 					break;
 				}
 				new_index += h;
 			}
 		}
+		
+		tutorial_angle = lerp(tutorial_angle,0,0.25)
 		
 		if keyboard_check_pressed(ord("H")) or keyboard_check_pressed(vk_escape){
 			activate()			

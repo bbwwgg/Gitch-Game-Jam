@@ -1,0 +1,1 @@
+draw_sprite_ext(sWisp,0,VIEW_WIDTH-100,50,3,3,0,c_white,1)
