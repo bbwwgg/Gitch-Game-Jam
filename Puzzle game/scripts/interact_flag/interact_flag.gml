@@ -35,6 +35,7 @@ function interact_flag(){
 	}
 	if instance_exists(oGameController){
 		oGameController.completed_level = true
+		oGameController.wisp_count = oPlayerController.wisp_count
 	}
-	//
+	
 }

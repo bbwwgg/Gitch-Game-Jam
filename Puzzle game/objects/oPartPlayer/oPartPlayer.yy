@@ -4,16 +4,17 @@
   "name": "oPartPlayer",
   "eventList": [
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
-    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":12,"isDnD":false,},
-    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":2,"isDnD":false,},
   ],
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Puzzle game",
-    "path": "Puzzle game.yyp",
+    "name": "particles",
+    "path": "folders/particles.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "oPart",
+    "path": "objects/oPart/oPart.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,

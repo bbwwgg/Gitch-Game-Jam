@@ -40,7 +40,7 @@ function player_on_board(){
 	}
 	
 	if  keyboard_check_pressed((vk_escape)){
-		transition(level_select)
+		transition(oGameController.world)	
 	}
 
 	//Check if any players are active

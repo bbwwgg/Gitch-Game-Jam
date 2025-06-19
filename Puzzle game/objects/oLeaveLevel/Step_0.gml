@@ -32,9 +32,9 @@ if time <= time_to{
 		}
 		
 		if time >= delay{
-			transition(level_select)	
+			transition(oGameController.world)
 		}
-		//
+		
 	}
 	
 }

@@ -7,8 +7,12 @@ for(var i=0; i < array_length(level_selecton); i ++){
 	var _cur_level = level_selecton[i]
 	
 	if _cur_level.room_index = room{
+		
+		world = _cur_level.room_index
+		
 		var _levels_to_unlock = undefined
 		if (!struct_exists(_cur_level, "levels")) {
+			
 			// Get all oLevel instances
 			var inst_count = instance_number(oLevel)
 
@@ -48,27 +52,46 @@ for(var i=0; i < array_length(level_selecton); i ++){
 				var grid_x = floor((inst.x - min_x) / grid_cell_w)
 				var grid_y = floor((inst.y - min_y) / grid_cell_h)
 				
-				if (inst.object_index != oLevelPath) {
-				
-					var _level_number = inst.level_number
-				
-					var _level_info = {
-						active : DEBUG_MODE, //CHANGE 
-						complete : false,
-						level_number : _level_number,
-						dest : inst.dest
-					}
-				
-					if !is_string(_level_number){
-						if _level_number < starting_level{
-							starting_level = _level_number
-							starting_location = [grid_x,grid_y]
+				switch (inst.object_index){
+					case (oNextWorld):
+						var _active = 0
+						if DEBUG_MODE or inst.active {
+							_active = 1
 						}
-					}
-				}else{
-					var _level_info = {
-						active : DEBUG_MODE
-					}
+					
+						var _level_info = {
+							world_dest : inst.world_dest,
+							active : _active
+						}					
+					break
+					case (oLevelPath):
+						var _level_info = {
+							active : DEBUG_MODE
+						}
+					break
+					case (oLevelBlocker):
+						var _level_info = {
+							active : DEBUG_MODE,
+							unlock_requirement : inst.unlock_requirement
+						}
+					break
+					default:
+						var _level_number = inst.level_number
+				
+						var _level_info = {
+							active : DEBUG_MODE, //CHANGE 
+							complete : false,
+							level_number : _level_number,
+							dest : inst.dest
+						}
+				
+						if !is_string(_level_number){
+							if _level_number < starting_level{
+								starting_level = _level_number
+								starting_location = [grid_x,grid_y]
+							}
+						}
+					break
 				}
 				
 				ds_grid_set(level_grid, grid_x, grid_y, _level_info)
@@ -88,7 +111,7 @@ for(var i=0; i < array_length(level_selecton); i ++){
 			
 			level_grid[# starting_location[0], starting_location[1]].active = true
 			
-			saved_cursor_pos = starting_location
+			_cur_level.saved_cursor_pos = starting_location
 			
 			
 		}else{
@@ -96,9 +119,9 @@ for(var i=0; i < array_length(level_selecton); i ++){
 			instance_destroy(oLevel)	
 		
 			if completed_level = true{
-				
-				var pos_x = saved_cursor_pos[0]
-				var pos_y = saved_cursor_pos[1]
+
+				var pos_x = _cur_level.saved_cursor_pos[0]
+				var pos_y = _cur_level.saved_cursor_pos[1]
 				
 				if _cur_level.levels[# pos_x, pos_y].complete = false{
 					_cur_level.levels[# pos_x, pos_y].complete = true
@@ -110,11 +133,20 @@ for(var i=0; i < array_length(level_selecton); i ++){
 		
 			
 		if !instance_exists(oLevelSelectionController){
+			
+			var _pos = _cur_level.saved_cursor_pos
+			
 			with instance_create_layer(0,0,"Instances",oLevelSelectionController){
+				
+				wisps_collected = other.wisp_total
+				
 				if !is_undefined(_levels_to_unlock){
-					state = unlocking_levels
+					state = adding_wisps
+					
+					wisps_to_add = other.wisp_count
+					other.wisp_total +=  other.wisp_count
 					levels_to_unlock = _levels_to_unlock
-					time = delay
+
 				}
 				current_map = _cur_level.levels
 				
@@ -127,8 +159,8 @@ for(var i=0; i < array_length(level_selecton); i ++){
 				y_offset = (global.camera_max_height - board_height*sprite_get_height(sLevelPath)) /2
 				
 				
-				cursor_pos_x = other.saved_cursor_pos[0]
-				cursor_pos_y = other.saved_cursor_pos[1]
+				cursor_pos_x = _pos[0]
+				cursor_pos_y = _pos[1]
 				
 				cursor_x = cursor_pos_x*tile_width
 				cursor_y = cursor_pos_y*tile_height

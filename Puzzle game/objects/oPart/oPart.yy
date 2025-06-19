@@ -10,8 +10,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Puzzle game",
-    "path": "Puzzle game.yyp",
+    "name": "particles",
+    "path": "folders/particles.yy",
   },
   "parentObjectId": null,
   "persistent": false,
