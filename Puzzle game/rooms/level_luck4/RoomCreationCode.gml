@@ -1,0 +1,1 @@
+global.luck_system.init([6,6,1,2])

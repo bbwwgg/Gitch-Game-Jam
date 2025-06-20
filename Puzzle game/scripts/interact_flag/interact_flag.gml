@@ -38,4 +38,7 @@ function interact_flag(){
 		oGameController.wisp_count = oPlayerController.wisp_count
 	}
 	
+	play_sfx(sfxWin)
+	pause_music()
+	
 }

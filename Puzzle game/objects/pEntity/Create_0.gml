@@ -57,6 +57,8 @@ function fall(){
 	sunk = true
 	depth = 100-y
 	
+	play_sfx(sfxWispSound)
+	
 	var _x = x + lengthdir_x(TILE_SIZE,dir*90)
 	var _y = y + lengthdir_y(TILE_SIZE,dir*90)
 	instance_create_layer(_x,_y,"effects", oPartSplash)
@@ -70,6 +72,7 @@ function fall(){
 		break
 		
 		case ENITITY.PLAYER:
+			sunk = false
 			explode()
 			//visible = false
 		break
@@ -92,24 +95,24 @@ function interact(_inst){
 }
 
 function explode(){
+		play_sfx(sfxWispSound)
 		visible = false
 		interactable = false
 		stop = false
 		moveable = false
 		camera_shake(6, 0.75) 
 		
-		var _prev_ent_count = array_length(global.board[# xTile, yTile][MAP_DATA.ENTITY])
-	
-		if _prev_ent_count = 0{
+
+		if array_length(global.board[# xTile, yTile][MAP_DATA.ENTITY]) = 0{
 			global.board[# xTile, yTile][MAP_DATA.ENTITY] = noone
 		}else{
-			for(var i = 0; i < _prev_ent_count; i ++){
-				if global.board[# xTile, yTile][MAP_DATA.ENTITY][i] = id{
+			for(var i = 0; i < array_length(global.board[# xTile, yTile][MAP_DATA.ENTITY]); i ++){
+				if global.board[# xTile, yTile][MAP_DATA.ENTITY][i] == id{
 					array_delete(global.board[# xTile, yTile][MAP_DATA.ENTITY],i,1)
 				}
 			}
 		}
-		
+
 		switch entity_id{
 			case ENITITY.PLAYER:
 			
@@ -171,49 +174,49 @@ function explode(){
 			break
 			
 			case ENITITY.LUCK_BLOCK:
-			var head_created = false
-			var slate_created = false
+				var head_created = false
+				var slate_created = false
 				
 
-			repeat(irandom_range(4,6)){
-				with instance_create_layer(x+TILE_SIZE/2,y+TILE_SIZE/2,"effects", oEffect){
-					sprite_index = sLuckpPart
+				repeat(irandom_range(4,6)){
+					with instance_create_layer(x+TILE_SIZE/2,y+TILE_SIZE/2,"effects", oEffect){
+						sprite_index = sLuckpPart
 				
-					depth = -999
+						depth = -999
 				
-					image_index = irandom_range(0,2)
+						image_index = irandom_range(0,2)
 				
 				
 				
-					image_speed = 0
-					hsp = random_range(-1.5,1.5)
-					vsp = random_range(-1,-3)
+						image_speed = 0
+						hsp = random_range(-1.5,1.5)
+						vsp = random_range(-1,-3)
 				
-					angle_change = (hsp+vsp)*2
+						angle_change = (hsp+vsp)*2
 				
-					if !head_created{
-						head_created = true
-						image_index = 3
-						angle_change*=2
-					}else{
-						if !slate_created{
-							slate_created = true
-							if other.image_index div 2 = 0{
-								image_index = 4
-							}else{
-								image_index = 5
+						if !head_created{
+							head_created = true
+							image_index = 3
+							angle_change*=2
+						}else{
+							if !slate_created{
+								slate_created = true
+								if other.image_index div 2 = 0{
+									image_index = 4
+								}else{
+									image_index = 5
+								}
+								angle_change*=2.5
 							}
-							angle_change*=2.5
 						}
+				
+						vsp_change = 0.12
+				
+						alpha_change = 0.02
+				
+						alarm[0] = 60
 					}
-				
-					vsp_change = 0.12
-				
-					alpha_change = 0.02
-				
-					alarm[0] = 60
 				}
-			}
 			break
 			
 			case ENITITY.WHISP:

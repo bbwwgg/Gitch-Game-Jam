@@ -9,7 +9,13 @@ time_to = 25
 time = 0
 
 rise_time = 0
+		
+
 rise_time_to = 30
+if room == level_final{
+	rise_time_to = 300
+	instance_create_layer(0,0,"effects",oThanks)
+}
 delay = 5
 
 explode = false

@@ -37,7 +37,7 @@ function interact_lock(){
 		if _luck <= 4{
 			image_index ++
 			camera_shake(3, 0.65) 
-		
+			play_sfx(sfxLock)
 		}else{
 			explode()
 		}

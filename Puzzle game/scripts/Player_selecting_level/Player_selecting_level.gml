@@ -2,6 +2,10 @@ function Player_selecting_level(){
 var h = sign(keyboard_check_pressed(ord("D"))-keyboard_check_pressed(ord("A"))+keyboard_check_pressed(vk_right)-keyboard_check_pressed(vk_left))
 var v = sign(keyboard_check_pressed(ord("S"))-keyboard_check_pressed(ord("W"))+keyboard_check_pressed(vk_down)-keyboard_check_pressed(vk_up))
 
+if global.music_paused{
+	resume_music()
+}
+
 
 if h != 0 or v != 0{
 	
@@ -30,6 +34,9 @@ if h != 0 or v != 0{
 				}
 				
 			}else{
+				
+				
+				
 				draw_lock = false
 				cursor_pos_x = _new_xpos
 				cursor_pos_y = _new_ypos
@@ -48,6 +55,7 @@ if h != 0 or v != 0{
 
 if keyboard_check_pressed(vk_space) || keyboard_check_pressed(vk_enter){
 	
+	if instance_exists(oTransition){return}
 	
 	with oGameController{
 		for(var i=0; i < array_length(level_selecton); i ++){
@@ -77,12 +85,14 @@ if keyboard_check_pressed(vk_space) || keyboard_check_pressed(vk_enter){
 	if !struct_exists(current_map[# cursor_pos_x, cursor_pos_y], "dest") { return }
 	
 
-	
+
 	var _dest = current_map[# cursor_pos_x, cursor_pos_y].dest
 	
 	if _dest = noone {_dest = level_lock1}
 
 	transition(_dest)	
+	play_sfx(sfxStart)
+
 }
 
 

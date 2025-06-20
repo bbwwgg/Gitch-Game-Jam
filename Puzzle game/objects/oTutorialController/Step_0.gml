@@ -1,4 +1,15 @@
 switch (state){
+	case HELP_STATE.FIRST_APPEAR:
+		if !instance_exists(oPlayerController) or instance_exists(oTransition){ return }
+		
+		oPlayerController.player_input = false
+		
+		if time > read_delay{
+			switch_state(HELP_STATE.ALERT)
+		}
+
+	break
+	
 	case HELP_STATE.IDLE:
 		
 		var h = sign(keyboard_check_pressed(ord("D"))-keyboard_check_pressed(ord("A"))+keyboard_check_pressed(vk_right)-keyboard_check_pressed(vk_left))
@@ -9,6 +20,7 @@ switch (state){
 			while (new_index >= 0 && new_index <= max_page) {
 				if (unlocked_tips[new_index]) {
 					page = new_index;
+					play_sfx(sfxNextPage)
 					tutorial_angle = h*-7
 					break;
 				}

@@ -77,7 +77,7 @@ function interact_push() {
 	
 
 	var dir =  (4 +image_index + _luck mod 2 * -2 + 1) mod 4
-	
+	play_sfx(sfxBounce)
 	//show_message(dir)
 	return move(interacting_inst, dir);
 }

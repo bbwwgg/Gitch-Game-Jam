@@ -3,6 +3,11 @@
 
 if !instance_exists(oCamera){ instance_create_layer(0,0,"Instances",oCamera) }
 
+if room = rmStartRoom{
+	transition(intro_level)
+	return
+}
+
 for(var i=0; i < array_length(level_selecton); i ++){
 	var _cur_level = level_selecton[i]
 	
@@ -117,17 +122,16 @@ for(var i=0; i < array_length(level_selecton); i ++){
 		}else{
 
 			instance_destroy(oLevel)	
-		
-			if completed_level = true{
+		}
+		if completed_level = true{
 
-				var pos_x = _cur_level.saved_cursor_pos[0]
-				var pos_y = _cur_level.saved_cursor_pos[1]
+			var pos_x = _cur_level.saved_cursor_pos[0]
+			var pos_y = _cur_level.saved_cursor_pos[1]
 				
-				if _cur_level.levels[# pos_x, pos_y].complete = false{
-					_cur_level.levels[# pos_x, pos_y].complete = true
+			if _cur_level.levels[# pos_x, pos_y].complete = false{
+				_cur_level.levels[# pos_x, pos_y].complete = true
 										
-					_levels_to_unlock = active_surrounding(_cur_level.levels, pos_x, pos_y)
-				}
+				_levels_to_unlock = active_surrounding(_cur_level.levels, pos_x, pos_y)
 			}
 		}
 		
@@ -189,6 +193,12 @@ if i = array_length(level_selecton){
 			if entity_index[_ent_id] != -1{
 				if unlocked_tips[entity_index[_ent_id]] = false{
 					unlocked_tips[entity_index[_ent_id]] = true
+					
+					if unlocked_tips[1] = false{
+						unlocked_tips[1] = true
+						updated_tips = 1
+					}
+					
 					if updated_tips = noone{
 						updated_tips = entity_index[_ent_id]
 					}

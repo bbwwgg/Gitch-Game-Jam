@@ -31,6 +31,7 @@ function adding_wisps(){
 	
 	if time mod spawn_delay == 0{
 		if wisp_index >= 0{
+			play_sfx(sfxWispSound)
 			wisps[wisp_index][0] = true
 			wisps[wisp_index][3] = time
 			

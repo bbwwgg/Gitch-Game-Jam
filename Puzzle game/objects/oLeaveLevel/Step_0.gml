@@ -29,6 +29,8 @@ if time <= time_to{
 			instance_create_layer(x+TILE_SIZE/2,y+TILE_SIZE/2,"effects",oPartPlayer)
 		
 			camera_shake(10)
+			
+			play_sfx(sfxWispSound)
 		}
 		
 		if time >= delay{

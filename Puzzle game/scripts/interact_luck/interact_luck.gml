@@ -11,6 +11,9 @@ function interact_luck(){
 			
 			entity_var = _luck
 			moveable = false
+			
+			play_sfx(sfxLuckTake)
+			
 		}else{
 			moveable = true
 		}

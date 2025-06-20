@@ -115,7 +115,7 @@ function player_on_board(){
 						}
 					}
 				
-
+					//play_sfx(sfxWalk)
 			
 					with _player{
 						var _dustx = lengthdir_x(TILE_SIZE,dir*90)

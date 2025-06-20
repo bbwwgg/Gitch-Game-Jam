@@ -2,7 +2,7 @@
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
   "name": "sGrass_base_tile",
-  "bbox_bottom": 191,
+  "bbox_bottom": 223,
   "bbox_left": 0,
   "bbox_right": 255,
   "bbox_top": 0,
@@ -17,7 +17,7 @@
   ],
   "gridX": 16,
   "gridY": 16,
-  "height": 192,
+  "height": 224,
   "HTile": false,
   "layers": [
     {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"1d367685-e264-4fda-b3e8-5635be90ffba","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},

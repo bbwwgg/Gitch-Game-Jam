@@ -41,7 +41,7 @@ switch(entity_id){
 		image_index = dir
 		y_offset = round(0.75*sin(time*0.05)+2)	
 		time ++
-		draw_sprite_ext(sprite_index,image_index,x,y+y_offset,1,1,0,c_white,image_alpha)
+		draw_sprite_ext(sprite_index,image_index,x,y+y_offset,1,1,0,c_white,image_alpha)	
 	break
 	case ENITITY.PUSH_RIGHT:
 	case ENITITY.PUSH_UP:

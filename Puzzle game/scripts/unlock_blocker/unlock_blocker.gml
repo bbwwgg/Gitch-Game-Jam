@@ -6,6 +6,7 @@ function unlock_blocker(){
 		instance_create_layer(x_offset + lock_x * tile_width, y_offset + lock_y * tile_height,"effects", oPartLevel)
 		struct_remove(current_map[# lock_x,lock_y], "unlock_requirement")
 		
+		play_sfx(sfxLevelExplosion)
 		var _base_created = false
 		
 		repeat(2){
@@ -34,7 +35,7 @@ function unlock_blocker(){
 			}
 		}
 	}
-	
+
 	
 	if time < delay{
 		time ++

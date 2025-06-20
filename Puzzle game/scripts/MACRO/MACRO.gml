@@ -1,5 +1,5 @@
 #macro TILE_SIZE 32
-#macro DEBUG_MODE true
+#macro DEBUG_MODE false
 
 #macro GUI_HUD_INTERIOR_WIDTH 105
 #macro GUI_HUD_INTERIOR_HEIGHT 14

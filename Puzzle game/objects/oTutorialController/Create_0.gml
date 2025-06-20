@@ -1,4 +1,5 @@
 enum HELP_STATE{
+	FIRST_APPEAR,
 	ENTER,
 	IDLE,
 	EXIT,
@@ -20,9 +21,8 @@ entity_index[ENITITY.LUCK_BLOCK] = 4
 unlocked_tips = array_create(sprite_get_number(sTutorialReminder), false)
 
 unlocked_tips[0] = true
-unlocked_tips[1] = true
 
-updated_tips = 1
+updated_tips = 0
 
 
 #macro TUTORIAL_WIDTH VIEW_WIDTH*0.7
@@ -32,7 +32,8 @@ tutorial_scale = TUTORIAL_WIDTH/sprite_get_width(sTutorialReminder)
 tutorial_w = tutorial_scale*sprite_get_width(sTutorialReminder)
 tutorial_h = tutorial_scale*sprite_get_height(sTutorialReminder)
 
-
+time = 0
+read_delay = 60
 
 wobble_time = 0
 angle = 0
@@ -51,6 +52,8 @@ mid_x = VIEW_WIDTH/2
 x_start = mid_x
 y_start = VIEW_HEIGHT+tutorial_h/2
 
+
+
 tutorial_x = x_start
 tutorial_y = y_start
 
@@ -62,8 +65,10 @@ time_to = 15
 arrow_time = 0
 tutorial_angle = 0
 
+book_alpha = 1
+
 function is_empty(){
-	for(var i = 2; i < array_length(unlocked_tips); i ++){
+	for(var i = 0; i < array_length(unlocked_tips); i ++){
 		if unlocked_tips[i] != false{
 			return false	
 		}
@@ -77,6 +82,9 @@ function switch_state(_state){
 	image_angle = 0
 	
 	switch(state){
+		case HELP_STATE.FIRST_APPEAR:
+			if instance_exists(oPlayerController){ 		oPlayerController.player_input = true }
+		break
 		case HELP_STATE.ALERT:
 			wobble_time = 0
 			angle = 0
@@ -87,6 +95,8 @@ function switch_state(_state){
 		case HELP_STATE.IDLE:
 		break
 		case HELP_STATE.ENTER:
+			
+			play_sfx(sfxPaper)
 			
 			if updated_tips != noone{
 				page = updated_tips
@@ -142,11 +152,21 @@ function mouse_on(){
 
 
 scale = 5
+min_scale = 5
+max_scale = 20
+
+
+
 width = sprite_get_width(sBook)*scale
 height = sprite_get_height(sBook)*scale
 
 y_offset = VIEW_HEIGHT-height/2
 x_offset = width*0.7
 
-state = HELP_STATE.HIDDEN
-switch_state(HELP_STATE.HIDDEN)
+book_x = x_offset
+book_y = y_offset
+book_x_dest = x_offset
+book_y_dest = y_offset
+
+state = HELP_STATE.ALERT
+switch_state( HELP_STATE.ALERT)

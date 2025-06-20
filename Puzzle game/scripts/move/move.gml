@@ -67,8 +67,11 @@ function move(_inst, _dir){
 				
 			
 			if _cur_next_ent.moveable{
+
 				if move(_cur_next_ent,_dir){
+					
 					var _updated_next_square = global.board[# _end_x, _end_y]
+
 					_next_ent = _updated_next_square[MAP_DATA.ENTITY]
 					_next_ent_count = array_length(_updated_next_square[MAP_DATA.ENTITY])
 					if _next_ent != noone{
@@ -97,17 +100,21 @@ function move(_inst, _dir){
 	}
 	
 	if _next_square[MAP_DATA.TILE] = 0{
+		var _updated_next_ent = _next_square[MAP_DATA.ENTITY]
+		var _filled = false
+		for(var i = 0; i < array_length(_updated_next_ent); ++i){
+			
+			if _updated_next_ent[i].sunk{
+				_filled = true
+				break
+			}
+		}
+		
 		//Check if there is an object floating here
-		if _next_ent = noone{
+
+		if !_filled{
 			_inst.fall()
 
-		}else{
-			for(var i = 0; i < _next_ent_count; ++i){
-				if !_next_ent[i].sunk{
-					_inst.fall()
-					break
-				}
-			}	
 		}
 	}
 	
@@ -125,12 +132,18 @@ function move(_inst, _dir){
 	}
 
 	
-	_prev_ent_count =array_length(global.board[# _start_x, _start_y][MAP_DATA.ENTITY])
+	_prev_ent_count = array_length(global.board[# _start_x, _start_y][MAP_DATA.ENTITY])
 
-	if _prev_ent_count = 1{
-		global.board[# _start_x, _start_y][MAP_DATA.ENTITY] = noone
+	if _prev_ent_count <= 1{
+		if _prev_ent_count = 0{
+			global.board[# _start_x, _start_y][MAP_DATA.ENTITY] = noone
+		}else{
+			if global.board[# _start_x, _start_y][MAP_DATA.ENTITY][0] = _inst.id{
+				global.board[# _start_x, _start_y][MAP_DATA.ENTITY] = noone
+			}
+		}
 	}else{
-		for(var i = 0; i < _prev_ent_count; i ++){
+		for(var i = 0; i < array_length(global.board[# _start_x, _start_y][MAP_DATA.ENTITY]); i ++){
 			if global.board[# _start_x, _start_y][MAP_DATA.ENTITY][i] = _inst{
 				array_delete(global.board[# _start_x, _start_y][MAP_DATA.ENTITY],i,1)
 			}
