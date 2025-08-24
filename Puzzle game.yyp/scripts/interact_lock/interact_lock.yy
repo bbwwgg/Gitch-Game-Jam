@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"interact_lock",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"interact_lock",
+  "parent":{
+    "name":"Entity",
+    "path":"folders/Entity.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

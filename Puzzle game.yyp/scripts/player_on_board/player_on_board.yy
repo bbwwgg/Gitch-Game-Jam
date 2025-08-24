@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"player_on_board",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"player_on_board",
+  "parent":{
+    "name":"Level",
+    "path":"folders/Controllers/Level.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

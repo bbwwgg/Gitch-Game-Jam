@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"move",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"move",
+  "parent":{
+    "name":"Entity",
+    "path":"folders/Entity.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"interact_luck",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"interact_luck",
+  "parent":{
+    "name":"Entity",
+    "path":"folders/Entity.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

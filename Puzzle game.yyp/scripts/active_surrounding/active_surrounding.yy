@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"active_surrounding",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"active_surrounding",
+  "parent":{
+    "name":"Controllers",
+    "path":"folders/Controllers.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

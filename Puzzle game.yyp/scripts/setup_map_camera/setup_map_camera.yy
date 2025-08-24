@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"setup_map_camera",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"setup_map_camera",
+  "parent":{
+    "name":"Camera",
+    "path":"folders/Camera.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

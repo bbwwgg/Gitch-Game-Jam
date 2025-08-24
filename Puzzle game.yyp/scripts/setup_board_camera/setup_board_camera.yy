@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"setup_board_camera",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"setup_board_camera",
+  "parent":{
+    "name":"Camera",
+    "path":"folders/Camera.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

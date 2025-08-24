@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"CAMERA_MACROS",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"CAMERA_MACROS",
+  "parent":{
+    "name":"Camera",
+    "path":"folders/Camera.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
