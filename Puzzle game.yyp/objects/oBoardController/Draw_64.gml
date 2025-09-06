@@ -1,10 +1,5 @@
 if array_length(global.luck_system.sequence) = 0 return
 
-
-
-
-
-
 var _width = GUI_SEQUENCE_WIDTH
 var _height = GUI_SEQUENCE_HEIGHT
 

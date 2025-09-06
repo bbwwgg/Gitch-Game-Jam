@@ -1,10 +1,15 @@
-//if instance_exists(oCamera){ instance_destroy(oCamera) }
+if instance_exists(oCamera){ instance_destroy(oCamera) }
 
 
 if !instance_exists(oCamera){ instance_create_layer(0,0,"Instances",oCamera) }
 
 if room = rmStartRoom{
-	transition(intro_level)
+	if !DEBUG_MODE{
+		transition(intro_level)
+	}else{
+		room_goto(intro_level)	
+	}
+	
 	return
 }
 
