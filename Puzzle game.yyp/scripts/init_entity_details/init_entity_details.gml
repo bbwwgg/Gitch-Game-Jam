@@ -1,14 +1,13 @@
 function init_entity_details(_id){
 	switch(_id){
 		case ENITITY.PLAYER:
-			interactable = true
 			stop = false
 			sprite_index = sPlayerIdle
+			step_script = step_player
 		break
 		case ENITITY.FLAG:
 			stop = true
 			moveable = false
-			interactable = true
 			interact_script = interact_flag
 			sprite_index = sExit
 			
@@ -19,7 +18,7 @@ function init_entity_details(_id){
 			sprite_index = sBox
 		break
 		case ENITITY.LOCK:
-			interactable = true
+
 			entity_var = -1
 			stop = true
 			interact_script = interact_lock
@@ -27,7 +26,7 @@ function init_entity_details(_id){
 			image_speed = 0
 		break
 		case ENITITY.STOP_LOCK:
-			interactable = true
+
 			entity_var = -1
 			stop = true
 			interact_script = interact_lock
@@ -35,7 +34,7 @@ function init_entity_details(_id){
 			image_speed = 0
 		break
 		case ENITITY.WHISP:
-			interactable = true
+
 			stop = true
 			moveable = false
 			
@@ -46,7 +45,7 @@ function init_entity_details(_id){
 		break
 		
 		case ENITITY.LUCK_BLOCK:
-			interactable = true
+	
 			stop = true
 			moveable = true
 			entity_var = -1
@@ -63,7 +62,7 @@ function init_entity_details(_id){
 			image_index ++
 		case ENITITY.PUSH_RIGHT:
 			sprite_index = sPush
-			interactable = true
+
 			stop = false
 			moveable = false
 			interact_script = interact_push

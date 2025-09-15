@@ -32,125 +32,60 @@ function move(_inst, _dir){
     }
 
 
+	//Check if we are in bounds
 	if (_end_x <0 or _end_y < 0) or
 		(_end_x >= ds_grid_width(global.board) or (_end_y >= ds_grid_height(global.board))){
 		return false
 	}
-	
-	
+
 	//Check collisions
-	
 	var _next_square = global.board[# _end_x, _end_y]
-	var _next_ent = _next_square[MAP_DATA.ENTITY]
 	
-	var _next_ent_count = array_length(_next_square[MAP_DATA.ENTITY])
-	var _prev_ent_count = array_length(global.board[# _start_x, _start_y][MAP_DATA.ENTITY])
-	
-	
-	if _next_square[MAP_DATA.OBJECT] != noone{
+	if _next_square[MAP_DATA.SOLID] != noone{
 		//Cannot move
 		return false
 	}
 	
-
-	if _next_ent != noone{
-		for(var i = 0; i < _next_ent_count; ++i){
-			
-			var _cur_next_ent = _next_ent[i]
-			
-			if _cur_next_ent.interactable{
-				var _result = _cur_next_ent.interact(_inst)
-				if _cur_next_ent.sprite_index = sPush{
-					return _result	
-				}
-			}
-				
-			
-			if _cur_next_ent.moveable{
-
-				if move(_cur_next_ent,_dir){
-					
-					var _updated_next_square = global.board[# _end_x, _end_y]
-
-					_next_ent = _updated_next_square[MAP_DATA.ENTITY]
-					_next_ent_count = array_length(_updated_next_square[MAP_DATA.ENTITY])
-					if _next_ent != noone{
-						continue
-					}else{
-						break	
-					}
-				}else{
-					return false	
-				}
-			}
-			
-			if _inst.entity_id = ENITITY.PLAYER{				
-			
-				if _cur_next_ent.stop and _cur_next_ent.entity_id != ENITITY.FLAG{
-					return false
-				}
-				
-
-			}else{
-				if _cur_next_ent.stop{
-					return false	
-				}
-			}
-		}	
+	
+	var _entities = oPlayerController.entity_map[# _end_x, _end_y];
+	
+	var _entity_priority = -1
+	
+	if _next_square[MAP_DATA.ENTITY] != noone{
+		_entity_priority = min(_inst.entity_id,_next_square[MAP_DATA.ENTITY].entity_id)
 	}
 	
-	if _next_square[MAP_DATA.TILE] = 0{
-		var _updated_next_ent = _next_square[MAP_DATA.ENTITY]
-		var _filled = false
-		for(var i = 0; i < array_length(_updated_next_ent); ++i){
-			
-			if _updated_next_ent[i].sunk{
-				_filled = true
-				break
-			}
+	
+	if is_array(_entities){
+		array_push(oPlayerController.entity_map[# _end_x, _end_y],_inst)
+		_entity_priority = _inst.entity_id
+	}else{
+		oPlayerController.entity_map[# _end_x, _end_y] = [_inst]
+	}
+
+	
+
+ 
+	if _next_square[MAP_DATA.TILE] = noone{	
+		//If the map is empty
+		_entity_priority = 0
+	}
+
+	if _entity_priority >= 0 {
+		
+		var _conflict_info = {
+			inst_calling :_inst.id,
+			location : [_end_x,_end_y]
 		}
 		
-		//Check if there is an object floating here
+		ds_priority_add(oPlayerController._conflict_list,_conflict_info,_entity_priority)
 
-		if !_filled{
-			_inst.fall()
-
-		}
-	}
-	
-
-	
-	_inst.xTile = _end_x
-	_inst.yTile = _end_y
-	
-	
-
-	if _next_ent = noone{
-		global.board[# _end_x, _end_y][MAP_DATA.ENTITY] = [_inst]
 	}else{
-		global.board[# _end_x, _end_y][MAP_DATA.ENTITY][array_length(_next_ent)] = _inst
-	}
-
-	
-	_prev_ent_count = array_length(global.board[# _start_x, _start_y][MAP_DATA.ENTITY])
-
-	if _prev_ent_count <= 1{
-		if _prev_ent_count = 0{
-			global.board[# _start_x, _start_y][MAP_DATA.ENTITY] = noone
-		}else{
-			if global.board[# _start_x, _start_y][MAP_DATA.ENTITY][0] = _inst.id{
-				global.board[# _start_x, _start_y][MAP_DATA.ENTITY] = noone
-			}
-		}
-	}else{
-		for(var i = 0; i < array_length(global.board[# _start_x, _start_y][MAP_DATA.ENTITY]); i ++){
-			if global.board[# _start_x, _start_y][MAP_DATA.ENTITY][i] = _inst{
-				array_delete(global.board[# _start_x, _start_y][MAP_DATA.ENTITY],i,1)
-			}
-		}
+		_inst.xTile = _end_x
+		_inst.yTile = _end_y
+		_inst.update_pos()
+		return true
 	}
 	
-	_inst.update_pos()
-
-	return true
+	return false
 }

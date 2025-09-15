@@ -109,7 +109,13 @@ for(var i = 0; i < grid_height; i ++){
 	for(var j = 0; j < grid_width; j ++){
 		global.board[# j, i] = array_create(MAP_DATA.COUNT,noone)
 		
-		global.board[# j, i][MAP_DATA.TILE] = tilemap_get(map_id,j,i)
+		//TODO change sGHrass to a var
+		var _tile_index = tilemap_get(map_id,j,i)
+		var _tile = noone
+		if _tile_index != 0{
+			_tile = [sGrass_tile,_tile_index]	
+		}
+		global.board[# j, i][MAP_DATA.TILE] = _tile
 		
 		var _entity = tilemap_get(entity_map,j,i)
 		
@@ -119,7 +125,7 @@ for(var i = 0; i < grid_height; i ++){
 				entity_id = _entity
 				xTile = j
 				yTile = i
-				global.board[# j, i][MAP_DATA.ENTITY] = [id]
+				global.board[# j, i][MAP_DATA.ENTITY] = id
 				
 				init_entity_details(entity_id)
 				
@@ -128,10 +134,11 @@ for(var i = 0; i < grid_height; i ++){
 
 		}
 		
+		
 		var _object =  tilemap_get(object_map,j,i)
 		
 		if _object > 0{
-			global.board[# j, i][MAP_DATA.OBJECT] = _object
+			global.board[# j, i][MAP_DATA.SOLID] =  [sHedge,_object]
 		}
 		
 	}
@@ -139,6 +146,8 @@ for(var i = 0; i < grid_height; i ++){
 
 
 if !instance_exists(oPlayerController){instance_create_layer(0,0,"controllers",oPlayerController)}
+
+oPlayerController.entity_map = ds_grid_create(grid_width,grid_height)
 
 base_xOffset = global.camera_margin_width
 base_yOffset = global.camera_margin_height
@@ -157,61 +166,41 @@ global.board_state = []
 
 function save_board_state() {
     var snapshot = ds_grid_create(global.board_width, global.board_height);
-
-    for (var _y = 0; _y < global.board_height; _y++) {
-        for (var _x = 0; _x < global.board_width; _x++) {
-            var cell = global.board[# _x, _y];
-            var cell_copy = array_create(array_length(cell), noone);
-
-            for (var i = 0; i < array_length(cell); i++) {
-                var item = cell[i];
-
-                if (is_array(item)) {
-                    // If this is an array, deep copy its contents, but also check if it contains instances
-                    var nested = item;
-                    var nested_copy = array_create(array_length(nested), noone);
-
-                    for (var j = 0; j < array_length(nested); j++) {
-                        var nested_item = nested[j];
-						
-                        if (instance_exists(nested_item)) {
-                            // Save instance with vars
-							
-                            nested_copy[j] = {
-                                inst: nested_item,
-                                vars: {
-                                    interactable: nested_item.interactable,
-                                    stop: nested_item.stop,
-                                    moveable: nested_item.moveable,
-                                    sunk: nested_item.sunk,
-									visible : nested_item.visible,
-									image_index : nested_item.image_index,
-									depth : nested_item.depth,
-									entity_var : nested_item.entity_var
-                                }
-                            };
-                        } else {
-                            nested_copy[j] = nested_item;
-                        }
-                    }
-                    cell_copy[i] = nested_copy;
-
-                 } else {
-                    // Primitive or noone
-                    cell_copy[i] = item;
-                }
+	
+	ds_grid_copy(snapshot, global.board)
+	
+	var _entities = []
+	
+	for (var i = 0; i < instance_number(pEntity); i++){
+	    var _inst = instance_find(pEntity, i);
+		
+		var _inst_info = {
+			inst : _inst,
+			object_type : _inst.entity_id,
+			pos : [_inst.xTile, _inst.yTile],
+			vars: {
+	            interactable: _inst.interactable,
+	            stop: _inst.stop,
+	            moveable: _inst.moveable,
+	            sunk: _inst.sunk,
+				visible : _inst.visible,
+				image_index : _inst.image_index,
+				depth : _inst.depth,
+				entity_var : _inst.entity_var
             }
-
-            snapshot[# _x, _y] = cell_copy;
-        }
-    }
-
+		}
+		array_push(_entities,_inst_info)
+	}
+	
 	var world_snapshot = {
 		luck : global.luck_system.index,
-		board : snapshot
+		board : snapshot,
+		entities : _entities
 	}
 
     array_push(global.board_state, world_snapshot);
+	
+	
 }
 
 function reset_board(){
@@ -237,6 +226,7 @@ function undo_board_state() {
 	//Undo the luck
 	global.luck_system.index = world_snapshot.luck
 	
+	
     // Replace global.board with snapshot
     // First free the current grid
     if (ds_exists(global.board, ds_type_grid)) {
@@ -246,38 +236,38 @@ function undo_board_state() {
 	
     global.board = snapshot;
 
-    // You may want to refresh or update entities and objects visually here if needed
-    // For example, update instances or tilemaps based on restored grid
+    
+	//Entity making
+	var _entity_fix = world_snapshot.entities
+	
+	for(var i = 0; i < array_length(_entity_fix); i ++ ){
+		var _cur_set = _entity_fix[i]
+		var _cur_entity = _cur_set.inst
+		
+		if !instance_exists(_cur_entity){
+			
+			_cur_entity = instance_create_layer(0,0,"Entity", pEntity)
+			_cur_entity.init_entity_details(_cur_set.object_type)
 
-    for (var _y = 0; _y < global.board_height; _y++) {
-        for (var _x = 0; _x  < global.board_width; _x ++) {
-			var cell = global.board[# _x, _y][MAP_DATA.ENTITY] 
-			if cell != noone{
-				var _inst_ar = []
-				for (var i = 0; i < array_length(cell); i++) {
-					var _cur_cell = cell[i]
-					var _cur_inst = _cur_cell.inst
-					
-					_cur_inst.xTile = _x
-					_cur_inst.yTile = _y
-					
-					_cur_inst.update_pos()
-					
-					_cur_inst.interactable = _cur_cell.vars.interactable
-					_cur_inst.stop = _cur_cell.vars.stop
-					_cur_inst.moveable = _cur_cell.vars.moveable
-					_cur_inst.sunk = _cur_cell.vars.sunk
-					_cur_inst.visible = _cur_cell.vars.visible
-					_cur_inst.image_index = _cur_cell.vars.image_index
-					_cur_inst.depth = _cur_cell.vars.depth
-					_cur_inst.entity_var = _cur_cell.vars.entity_var
-					array_push(_inst_ar, _cur_inst)
-				}
-				
-				global.board[# _x, _y][MAP_DATA.ENTITY] = _inst_ar
-			}
 		}
+		
+		
+		with _cur_entity {
+			xTile = _cur_set.pos[0]
+			yTile = _cur_set.pos[1]
+					
+			update_pos()
+				
+			interactable = _cur_set.vars.interactable
+			stop = _cur_set.vars.stop
+			moveable = _cur_set.vars.moveable
+			sunk = _cur_set.vars.sunk
+			visible = _cur_set.vars.visible
+			image_index = _cur_set.vars.image_index
+			depth = _cur_set.vars.depth
+			entity_var = _cur_set.vars.entity_var
+		}
+		
 	}
-
     //show_debug_message("Board state restored from undo.");
 }

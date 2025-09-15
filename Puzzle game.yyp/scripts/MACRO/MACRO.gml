@@ -6,7 +6,7 @@
 
 enum MAP_DATA{
 	ENTITY, //Enity on tile.
-	OBJECT, // object on tile
+	SOLID, // object on tile
 	TILE, //sprite for ground
 	COUNT	
 }

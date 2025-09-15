@@ -28,7 +28,7 @@ world = map1.room_index
 global.music = sndMusicMain;
 global.music_volume = 0.5;
 global.music_id = noone;
-global.music_paused = false;
+global.music_paused = DEBUG_MODE;
 play_music(sndMusicMain);
 
 

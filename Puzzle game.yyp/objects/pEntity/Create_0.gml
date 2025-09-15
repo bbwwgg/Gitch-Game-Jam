@@ -16,6 +16,10 @@ dir = -1
 
 image_speed = 0
 
+step_script = noone
+interact_script= noone
+
+
 function update_pos(){
 	x = xTile*TILE_SIZE + global.camera_margin_width
 	y = yTile*TILE_SIZE + global.camera_margin_height
@@ -51,6 +55,8 @@ function update_pos(){
 }
 
 function fall(){
+	instance_destroy()
+	
 	interactable = false
 	moveable = false
 	stop = false

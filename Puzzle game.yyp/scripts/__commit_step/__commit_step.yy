@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__commit_step",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__commit_step",
+  "parent":{
+    "name":"Controllers",
+    "path":"folders/Controllers.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

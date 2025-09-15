@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"step_player",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"step_player",
+  "parent":{
+    "name":"Controllers",
+    "path":"folders/Controllers.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
