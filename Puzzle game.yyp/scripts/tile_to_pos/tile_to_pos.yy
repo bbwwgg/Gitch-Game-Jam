@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"tile_to_pos",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"tile_to_pos",
+  "parent":{
+    "name":"Level",
+    "path":"folders/Controllers/Level.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

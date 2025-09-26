@@ -182,22 +182,9 @@ time = 0
 global.board_state = []
 
 function save_board_state() {
-    var snapshot = ds_grid_create(global.board_width, global.board_height);
-	
-	ds_grid_copy(snapshot, global.board)
-	
-	/*
-	var _print = []
-	for(var i = 0; i < grid_height; i ++){
-		var _line = []
-		for(var j = 0; j < grid_width; j ++){
-			array_push(_line,global.board[# i,j][MAP_DATA.ENTITY])
-		}
-		array_push(_print,_line)
-	}
-	
-	show_debug_message(_print)*/
-	
+
+	var snapshot = clone_deep_board(global.board)
+		
 	var _entities = []
 	
 	for (var i = 0; i < instance_number(pEntity); i++){
@@ -221,13 +208,30 @@ function save_board_state() {
 		array_push(_entities,_inst_info)
 	}
 	
+	
 	var world_snapshot = {
 		luck : global.luck_system.index,
 		board : snapshot,
 		entities : _entities
 	}
+	
+	
+	var _print = ""
+	for(var i = 0; i < grid_height; i ++){
+		var _line = []
+		for(var j = 0; j < grid_width; j ++){
+			array_push(_line,world_snapshot.board[# j,i][MAP_DATA.TILE])
+		}
+		_print+=string(_line)+"\n"
+	}
+	
+	show_debug_message(_print)
+	show_debug_message("End")
+	
+	
 
     array_push(global.board_state, world_snapshot);
+
 }
 
 function reset_board(){
@@ -250,18 +254,30 @@ function undo_board_state() {
     var world_snapshot = array_pop(global.board_state);
     var snapshot = world_snapshot.board
 	
+	var _print = "";
+    for (var i = 0; i < grid_height; i++) {
+        var _line = [];
+        for (var j = 0; j < grid_width; j++) {
+            array_push(_line, global.board[# j, i][MAP_DATA.TILE]);
+        }
+        _print += string(_line) + "\n";
+    }
+    show_debug_message(_print);
+    show_debug_message("End");
+	
 	//Undo the luck
 	global.luck_system.index = world_snapshot.luck
 	
-	
-    // Replace global.board with snapshot
-    // First free the current grid
-    if (ds_exists(global.board, ds_type_grid)) {
-        ds_grid_destroy(global.board);
-    }
-	
-	
-    global.board = snapshot;
+	// Free the old board
+	if (ds_exists(global.board, ds_type_grid)) {
+	    ds_grid_destroy(global.board);
+	}
+
+	// Make a fresh grid and copy into it
+	global.board = ds_grid_create(grid_width,grid_height);
+	ds_grid_copy(global.board, snapshot);
+
+	ds_grid_destroy(snapshot);
 
     
 	//Entity making
@@ -286,10 +302,14 @@ function undo_board_state() {
 		
 		
 		with _cur_entity {
+
+			xPrev = xTile
+			yPrev = yTile
+
 			xTile = _cur_set.pos[0]
 			yTile = _cur_set.pos[1]
 					
-			update_pos()
+			update_pos()		
 				
 			interactable = _cur_set.vars.interactable
 			stop = _cur_set.vars.stop
@@ -302,5 +322,6 @@ function undo_board_state() {
 		}
 		
 	}
+		
     //show_debug_message("Board state restored from undo.");
 }

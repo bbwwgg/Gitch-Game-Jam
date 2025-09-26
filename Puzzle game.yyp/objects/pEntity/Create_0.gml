@@ -33,8 +33,8 @@ function update_pos(){
 		global.board[# xTile, yTile][MAP_DATA.ENTITY] = [entity_id,entity_key]
 	}
 	
-	x = xTile*TILE_SIZE + global.camera_margin_width
-	y = yTile*TILE_SIZE + global.camera_margin_height
+	x = tile_to_x(xTile)
+	y = tile_to_y(yTile)
 	
 	if !sunk{
 		depth = -y
@@ -68,19 +68,16 @@ function update_pos(){
 
 function fall(){
 	instance_destroy()
-	
-	interactable = false
-	moveable = false
-	stop = false
-	sunk = true
-	depth = 100-y
-	
+		
 	play_sfx(sfxWispSound)
 	
-	var _x = x + lengthdir_x(TILE_SIZE,dir*90)
-	var _y = y + lengthdir_y(TILE_SIZE,dir*90)
+	var _x = xTile//x + lengthdir_x(TILE_SIZE,dir*90)
+	var _y = yTile//y + lengthdir_y(TILE_SIZE,dir*90)
 	instance_create_layer(_x,_y,"effects", oPartSplash)
 	
+	
+	
+	//TODO change this to a larger var
 	switch entity_id{
 		default:
 			image_index ++	
@@ -99,6 +96,8 @@ function fall(){
 			image_index += 2
 		break 
 	}
+
+	global.board[# xTile, yTile][MAP_DATA.TILE] = [sprite_index, image_index] 
 
 }
 

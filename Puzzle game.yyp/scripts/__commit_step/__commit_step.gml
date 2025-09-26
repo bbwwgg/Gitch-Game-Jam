@@ -29,7 +29,10 @@ function __commit_step(){
 		if array_length(_entities_involved) == 1{
 			//we are falling
 			if global.board[# _conflict_info.location[0],_conflict_info.location[1]][MAP_DATA.TILE] == noone{
-			_entities_involved[0].fall()
+				_entities_involved[0].xTile = _conflict_info.location[0]
+				_entities_involved[0].yTile = _conflict_info.location[1]
+				_entities_involved[0].fall()
+			
 			}
 		}
 		

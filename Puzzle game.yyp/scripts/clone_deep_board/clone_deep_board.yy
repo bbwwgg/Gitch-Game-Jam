@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"clone_deep_board",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"clone_deep_board",
+  "parent":{
+    "name":"Level",
+    "path":"folders/Controllers/Level.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
