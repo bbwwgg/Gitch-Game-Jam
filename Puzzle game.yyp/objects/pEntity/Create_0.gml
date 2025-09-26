@@ -19,8 +19,20 @@ image_speed = 0
 step_script = noone
 interact_script= noone
 
+xTile = 0
+yTile = 0
+xPrev = 0
+yPrev = 0
+
 
 function update_pos(){
+	
+	//Update the entity grid
+	if yPrev != yTile or xPrev != xTile{
+		global.board[# xPrev, yPrev][MAP_DATA.ENTITY] = noone
+		global.board[# xTile, yTile][MAP_DATA.ENTITY] = [entity_id,entity_key]
+	}
+	
 	x = xTile*TILE_SIZE + global.camera_margin_width
 	y = yTile*TILE_SIZE + global.camera_margin_height
 	

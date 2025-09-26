@@ -104,6 +104,9 @@ global.board = ds_grid_create(grid_width,grid_height)
 setup_board_camera()
 
 
+//Create a key of all entities
+global.entity_key = array_create(ENITITY.COUNT, noone)
+
 //Board
 for(var i = 0; i < grid_height; i ++){
 	for(var j = 0; j < grid_width; j ++){
@@ -119,6 +122,7 @@ for(var i = 0; i < grid_height; i ++){
 		
 		var _entity = tilemap_get(entity_map,j,i)
 		
+		//If there is an entity here
 		if _entity > 0{
 			
 			with instance_create_layer(0,0,"Entity", pEntity){
@@ -129,6 +133,18 @@ for(var i = 0; i < grid_height; i ++){
 				
 				init_entity_details(entity_id)
 				
+				var _entity_key = global.entity_key[entity_id]
+				
+				if _entity_key == noone{
+					global.entity_key[entity_id] = []	
+				}
+				
+				array_push(global.entity_key[entity_id],id)
+	
+				var _inst_count = array_length(global.entity_key[entity_id])
+	
+				entity_key = _inst_count - 1
+	
 				update_pos()
 			}
 
@@ -148,6 +164,7 @@ for(var i = 0; i < grid_height; i ++){
 if !instance_exists(oPlayerController){instance_create_layer(0,0,"controllers",oPlayerController)}
 
 oPlayerController.entity_map = ds_grid_create(grid_width,grid_height)
+
 
 base_xOffset = global.camera_margin_width
 base_yOffset = global.camera_margin_height
@@ -169,14 +186,26 @@ function save_board_state() {
 	
 	ds_grid_copy(snapshot, global.board)
 	
+	/*
+	var _print = []
+	for(var i = 0; i < grid_height; i ++){
+		var _line = []
+		for(var j = 0; j < grid_width; j ++){
+			array_push(_line,global.board[# i,j][MAP_DATA.ENTITY])
+		}
+		array_push(_print,_line)
+	}
+	
+	show_debug_message(_print)*/
+	
 	var _entities = []
 	
 	for (var i = 0; i < instance_number(pEntity); i++){
 	    var _inst = instance_find(pEntity, i);
 		
 		var _inst_info = {
-			inst : _inst,
 			object_type : _inst.entity_id,
+			entity_key : _inst.entity_key,
 			pos : [_inst.xTile, _inst.yTile],
 			vars: {
 	            interactable: _inst.interactable,
@@ -199,8 +228,6 @@ function save_board_state() {
 	}
 
     array_push(global.board_state, world_snapshot);
-	
-	
 }
 
 function reset_board(){
@@ -242,12 +269,18 @@ function undo_board_state() {
 	
 	for(var i = 0; i < array_length(_entity_fix); i ++ ){
 		var _cur_set = _entity_fix[i]
-		var _cur_entity = _cur_set.inst
+		var _cur_entity =global.entity_key[_cur_set.object_type, _cur_set.entity_key]
 		
 		if !instance_exists(_cur_entity){
 			
 			_cur_entity = instance_create_layer(0,0,"Entity", pEntity)
-			_cur_entity.init_entity_details(_cur_set.object_type)
+			
+			with _cur_entity{
+				entity_key = _cur_set.entity_key
+				entity_id = _cur_set.object_type
+				global.entity_key[entity_id,entity_key] = id
+				init_entity_details(entity_id)
+			}
 
 		}
 		

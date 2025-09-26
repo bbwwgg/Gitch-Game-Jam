@@ -7,12 +7,15 @@ enum DIR{
 
 function move(_inst, _dir){
 
+
 	var _start_x = _inst.xTile
 	var _start_y = _inst.yTile
 	
+	_inst.xPrev = _start_x
+	_inst.yPrev = _start_y
+
 	_inst.dir = _dir
 	
-	//show_message([_start_x,_start_y])
 	var _end_x = _start_x
 	var _end_y = _start_y
 	
@@ -52,24 +55,41 @@ function move(_inst, _dir){
 	var _entity_priority = -1
 	
 	if _next_square[MAP_DATA.ENTITY] != noone{
-		_entity_priority = min(_inst.entity_id,_next_square[MAP_DATA.ENTITY].entity_id)
-	}
-	
-	
-	if is_array(_entities){
-		array_push(oPlayerController.entity_map[# _end_x, _end_y],_inst)
-		_entity_priority = _inst.entity_id
+		if _next_square[MAP_DATA.ENTITY].interact_script = noone{
+			if _next_square[MAP_DATA.ENTITY].stop = true{
+				return false
+			}
+		}else{
+			_entity_priority = _inst.entity_id
+			//Is array
+			if is_array(_entities){
+				array_push(oPlayerController.entity_map[# _end_x, _end_y],_inst)
+			}else{
+				
+				//Add this plus the entity we are interacting with
+				oPlayerController.entity_map[# _end_x, _end_y] = [_inst,_next_square[MAP_DATA.ENTITY]]
+			}
+			
+		}
 	}else{
-		oPlayerController.entity_map[# _end_x, _end_y] = [_inst]
-	}
-
 	
+	
+		if _next_square[MAP_DATA.TILE] = noone{	
+			//If the map is empty
+			_entity_priority = 0
+		}
+	
+		if is_array(_entities){
+			array_push(oPlayerController.entity_map[# _end_x, _end_y],_inst)
+			_entity_priority = _inst.entity_id
+		}else{
+			oPlayerController.entity_map[# _end_x, _end_y] = [_inst]
+		}
 
- 
-	if _next_square[MAP_DATA.TILE] = noone{	
-		//If the map is empty
-		_entity_priority = 0
 	}
+	
+ 
+
 
 	if _entity_priority >= 0 {
 		
