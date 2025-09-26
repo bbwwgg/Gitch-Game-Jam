@@ -215,20 +215,6 @@ function save_board_state() {
 		entities : _entities
 	}
 	
-	
-	var _print = ""
-	for(var i = 0; i < grid_height; i ++){
-		var _line = []
-		for(var j = 0; j < grid_width; j ++){
-			array_push(_line,world_snapshot.board[# j,i][MAP_DATA.TILE])
-		}
-		_print+=string(_line)+"\n"
-	}
-	
-	show_debug_message(_print)
-	show_debug_message("End")
-	
-	
 
     array_push(global.board_state, world_snapshot);
 
@@ -253,18 +239,7 @@ function undo_board_state() {
     // Pop the last saved state snapshot
     var world_snapshot = array_pop(global.board_state);
     var snapshot = world_snapshot.board
-	
-	var _print = "";
-    for (var i = 0; i < grid_height; i++) {
-        var _line = [];
-        for (var j = 0; j < grid_width; j++) {
-            array_push(_line, global.board[# j, i][MAP_DATA.TILE]);
-        }
-        _print += string(_line) + "\n";
-    }
-    show_debug_message(_print);
-    show_debug_message("End");
-	
+		
 	//Undo the luck
 	global.luck_system.index = world_snapshot.luck
 	
