@@ -1,7 +1,11 @@
 function step_player(){
 	if oPlayerController.dir != -1{
 
-		move(self, oPlayerController.dir)
+		if !move(self, oPlayerController.dir){
+			add_to_entity_map(self)
+		}
+		
+		
 		/*if move(self, dir) {
 	
 			var _wisp_trail = wisp_follow[current_player_index];

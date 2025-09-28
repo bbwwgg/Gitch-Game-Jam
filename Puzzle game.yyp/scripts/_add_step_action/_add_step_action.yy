@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"_add_step_action",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"_add_step_action",
+  "parent":{
+    "name":"System",
+    "path":"folders/System.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

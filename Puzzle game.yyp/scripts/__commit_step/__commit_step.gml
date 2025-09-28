@@ -5,12 +5,23 @@ function __commit_step(){
 	//Preform a step
 	ds_grid_clear(entity_map,0)
 	
+	//List of any interaction/movement overlaps
 	_conflict_list = ds_priority_create()
+	
+	
+	//Create a new blank array to add movement wishes to
+	_update_list = [ [] ]
 	
 	//Make desired points
 	with(pEntity){
+		
+		
 		if step_script != noone{ 
+			update_step = 0
 			script_execute(step_script)
+		}else{
+			//If we are not preforming an action we are stationary
+			add_to_entity_map(self)
 		}
 	}
 	
@@ -31,9 +42,12 @@ function __commit_step(){
 			if global.board[# _conflict_info.location[0],_conflict_info.location[1]][MAP_DATA.TILE] == noone{
 				_entities_involved[0].xTile = _conflict_info.location[0]
 				_entities_involved[0].yTile = _conflict_info.location[1]
-				_entities_involved[0].fall()
-			
+				_add_step_action(ACTION.FALL,_entities_involved[0])
 			}
+		}else{
+			//Check who initiated, if both are moving? do something idk
+			
+			
 		}
 		
 		//Resolve any conflicts
@@ -42,5 +56,26 @@ function __commit_step(){
 	
 	ds_priority_destroy(_conflict_list)
 	
+	
+	//Preform movement, and interactions
+	for(var i = 0; i < array_length(_update_list); i ++){
+		for(var j = 0; j < array_length(_update_list[i]); j ++){
+
+			var _cur = _update_list[i][j]
+			var _inst = _cur[0]
+			var _action = _cur[1]
+			
+			switch (_action){
+				case ACTION.MOVE:
+					_inst.update_pos()
+				break
+				case ACTION.FALL:
+					_inst.fall()
+				break
+			}
+			
+			
+		}
+	}
 	
 }

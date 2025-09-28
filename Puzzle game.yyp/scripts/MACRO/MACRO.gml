@@ -31,3 +31,9 @@ enum ENITITY{
 	PUSH_DOWN,
 	COUNT
 }
+
+enum ACTION{
+	MOVE,
+	INTERACT,
+	FALL
+}

@@ -50,12 +50,23 @@ function move(_inst, _dir){
 	}
 	
 	
-	var _entities = oPlayerController.entity_map[# _end_x, _end_y];
+	
+	
+	_inst.xTile = _end_x
+	_inst.yTile = _end_y
+	add_to_entity_map(_inst)
+	
+	_add_step_action(ACTION.MOVE)
+	return true
+	
+	/*
+	//var _entities = oPlayerController.entity_map[# _end_x, _end_y];
 	
 	var _entity_priority = -1
 	
-	if _next_square[MAP_DATA.ENTITY] != noone{
-		if _next_square[MAP_DATA.ENTITY].interact_script = noone{
+	if _entities != 0{
+
+		if false{// _next_square[MAP_DATA.ENTITY].interact_script = noone{
 			if _next_square[MAP_DATA.ENTITY].stop = true{
 				return false
 			}
@@ -107,5 +118,5 @@ function move(_inst, _dir){
 		return true
 	}
 	
-	return false
+	return false*/
 }

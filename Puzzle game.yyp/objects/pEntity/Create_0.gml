@@ -75,8 +75,6 @@ function fall(){
 	var _y = yTile//y + lengthdir_y(TILE_SIZE,dir*90)
 	instance_create_layer(_x,_y,"effects", oPartSplash)
 	
-	
-	
 	//TODO change this to a larger var
 	switch entity_id{
 		default:
