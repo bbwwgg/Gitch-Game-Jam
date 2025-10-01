@@ -10,72 +10,121 @@ function __commit_step(){
 	
 	
 	//Create a new blank array to add movement wishes to
-	_update_list = [ [] ]
-	
+	_update_list = [[]]
+		
 	//Make desired points
-	with(pEntity){
-		
-		
+	with(pEntity){		
 		if step_script != noone{ 
-			update_step = 0
 			script_execute(step_script)
 		}else{
 			//If we are not preforming an action we are stationary
-			add_to_entity_map(self)
+			add_to_entity_map(self.id)
 		}
 	}
 	
-	var _board_updated = false
-	
-	while ds_priority_size(_conflict_list) > 0{
+	while true{
+		//Conflict
+		while ds_priority_size(_conflict_list) > 0{
 		
-		_board_updated = true
+			var _conflict_info = ds_priority_delete_min(_conflict_list)
+			var _entities_involved = entity_map[# _conflict_info.location[0],_conflict_info.location[1]]
 		
-		var _conflict_info = ds_priority_delete_min(_conflict_list)
+			//By default lower priority take the square
+			if array_length(_entities_involved) == 1{
+				//we are falling
+				if global.board[# _conflict_info.location[0],_conflict_info.location[1]][MAP_DATA.TILE] == noone{
+					_add_step_action(ACTION.FALL,_entities_involved[0])
+				}
+			}else{
+				//Check who initiated, if both are moving? do something idk
+				//TODO change this so that it takes from the database instead (for consistancy)
+				var _entity_priority = ds_priority_create()
+				var _interactable_entities = []
+					
+				for (var i = 0; i < array_length(_entities_involved); i++) {
+			        var _e = _entities_involved[i];
+        
+			        if (_e.xTile != _e.xPrev || _e.yTile != _e.yPrev) {
+			           ds_priority_add(_entity_priority,_e,_e.entity_id)
+			        }else{
+						array_push(_interactable_entities,_e)
+					}
+				}
+				
+				array_sort(_interactable_entities, function( a, b){
+					return a.entity_id - b.entity_id;	
+				})
+				
+				while !ds_priority_empty(_entity_priority){
+					var _e = ds_priority_delete_min(_entity_priority)
+					
+					var _can_move = false
+					
+					
+					for(var i = 0; i < array_length(_interactable_entities); i ++){
+						var _interaction_entity = _interactable_entities[i]
+						
+						if _interaction_entity.interact_script != noone{
+							//script_execute(_interaction_entity.interact_script)
+						}
+					}
+					
+					if !_can_move{
+						_e.xTile = xPrev
+						_e.yTile = yPrev
+					}
+					
+				}
+				
+				
+				ds_priority_destroy(_entity_priority)
 		
-		var _entities_involved = entity_map[# _conflict_info.location[0],_conflict_info.location[1]]
-		
-		//By default lower priority take the square
-		
-		if array_length(_entities_involved) == 1{
-			//we are falling
-			if global.board[# _conflict_info.location[0],_conflict_info.location[1]][MAP_DATA.TILE] == noone{
-				_entities_involved[0].xTile = _conflict_info.location[0]
-				_entities_involved[0].yTile = _conflict_info.location[1]
-				_add_step_action(ACTION.FALL,_entities_involved[0])
 			}
-		}else{
-			//Check who initiated, if both are moving? do something idk
-			
-			
 		}
+		
+		
+		//Preform movement, and interactions
+		for(var i = 0; i < array_length(_update_list); i ++){
+			for(var j = 0; j < array_length(_update_list[i]); j ++){
+
+				var _cur = _update_list[i][j]
+				var _inst = _cur[0]
+				var _action = _cur[1]
+			
+				switch (_action){
+					case ACTION.MOVE:
+						_inst.update_pos()
+					break
+					case ACTION.FALL:
+						_inst.fall()
+					break
+				}
+			
+			
+			}
+		}
+		
+
+		//moving to square with a stationary object
+		//
 		
 		//Resolve any conflicts
 		
+	
+	
+		
+		
+		break
+		
+		
+		
 	}
 	
+	
+
 	ds_priority_destroy(_conflict_list)
 	
 	
-	//Preform movement, and interactions
-	for(var i = 0; i < array_length(_update_list); i ++){
-		for(var j = 0; j < array_length(_update_list[i]); j ++){
 
-			var _cur = _update_list[i][j]
-			var _inst = _cur[0]
-			var _action = _cur[1]
-			
-			switch (_action){
-				case ACTION.MOVE:
-					_inst.update_pos()
-				break
-				case ACTION.FALL:
-					_inst.fall()
-				break
-			}
-			
-			
-		}
-	}
 	
 }

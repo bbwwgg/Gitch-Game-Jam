@@ -4,7 +4,7 @@ function add_to_entity_map(_entity){
 	var yTile = _entity.yTile
 	
 	var _id = _entity.id
-		
+	
 	with oPlayerController{
 		if is_array(entity_map[# xTile, yTile]){
 			array_push(entity_map[# xTile, yTile],_id)
@@ -17,13 +17,13 @@ function add_to_entity_map(_entity){
 				}
 			}
 				
-			ds_priority_add(_conflict_list,{inst_calling :_id,location : [xTile,yTile]},_smallest)
+			ds_priority_add(_conflict_list,{inst_calling : _id,location : [xTile,yTile]},_smallest)
 		}else{		
 			entity_map[# xTile, yTile] = [_id]
 			
 			//Falling
 			if global.board[# xTile, yTile] [MAP_DATA.TILE] = noone{
-				ds_priority_add(_conflict_list,{inst_calling :_id,location : [xTile,yTile]},0)
+				ds_priority_add(_conflict_list,{inst_calling : _id, location : [xTile,yTile]},0)
 			}
 		
 		}
