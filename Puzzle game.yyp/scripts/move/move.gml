@@ -49,23 +49,25 @@ function move(_inst, _dir){
 		return false
 	}
 	
-	
+	/*
 	if _next_square[MAP_DATA.ENTITY] != noone{
 		var _inst_to_find = global.entity_key[_next_square[MAP_DATA.ENTITY] [0],_next_square[MAP_DATA.ENTITY][1]]
 		
 		if _inst_to_find == oPlayerController.entity_map[# _start_x, _start_y]{
 			return false
 		}
-	}
+	}*/
 	
 
 	
 	_inst.xTile = _end_x
 	_inst.yTile = _end_y
 	
-	if global.board[# xTile, yTile] [MAP_DATA.TILE] != noone{
-		_add_step_action(ACTION.MOVE, _inst)
-	}
+	//if global.board[# xTile, yTile][MAP_DATA.TILE] != noone{
+	//	_add_step_action(ACTION.MOVE, _inst)
+	//}
+	
+	add_to_entity_map(_inst)
 	
 	return true
 	

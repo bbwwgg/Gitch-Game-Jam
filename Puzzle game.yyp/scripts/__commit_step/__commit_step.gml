@@ -28,32 +28,25 @@ function __commit_step(){
 		
 			var _conflict_info = ds_priority_delete_min(_conflict_list)
 			var _entities_involved = entity_map[# _conflict_info.location[0],_conflict_info.location[1]]
-		
-			//By default lower priority take the square
-			if array_length(_entities_involved) == 1{
-				//we are falling
-				if global.board[# _conflict_info.location[0],_conflict_info.location[1]][MAP_DATA.TILE] == noone{
-					_add_step_action(ACTION.FALL,_entities_involved[0])
-				}
-			}else{
-				//Check who initiated, if both are moving? do something idk
-				//TODO change this so that it takes from the database instead (for consistancy)
-				var _entity_priority = ds_priority_create()
-				var _interactable_entities = []
+			
+			//Check who initiated, if both are moving? do something idk
+			//TODO change this so that it takes from the database instead (for consistancy)
+			var _entity_priority = ds_priority_create()
+			var _interactable_entities = []
 					
-				for (var i = 0; i < array_length(_entities_involved); i++) {
-			        var _e = _entities_involved[i];
-        
-			        if (_e.xTile != _e.xPrev || _e.yTile != _e.yPrev) {
-			           ds_priority_add(_entity_priority,_e,_e.entity_id)
-			        }else{
-						array_push(_interactable_entities,_e)
-					}
+			for (var i = 0; i < array_length(_entities_involved); i++) {
+				var _e = _entities_involved[i];
+                if (_e.xTile != _e.xPrev || _e.yTile != _e.yPrev) {
+					ds_priority_add(_entity_priority,_e,_e.entity_id)
+			    }else{
+					array_push(_interactable_entities,_e)
 				}
+			}
 				
-				array_sort(_interactable_entities, function( a, b){
-					return a.entity_id - b.entity_id;	
-				})
+			array_sort(_interactable_entities, function( a, b){
+				return a.entity_id - b.entity_id;	
+			
+			})
 				
 				while !ds_priority_empty(_entity_priority){
 					var _e = ds_priority_delete_min(_entity_priority)
@@ -79,7 +72,7 @@ function __commit_step(){
 				
 				ds_priority_destroy(_entity_priority)
 		
-			}
+			
 		}
 		
 		
