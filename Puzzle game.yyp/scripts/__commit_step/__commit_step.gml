@@ -22,99 +22,87 @@ function __commit_step(){
 		}
 	}
 	
-	while true{
-		//Conflict
-		while ds_priority_size(_conflict_list) > 0{
+	
+
+	//Conflict
+	while ds_priority_size(_conflict_list) > 0{
 		
-			var _conflict_info = ds_priority_delete_min(_conflict_list)
-			var _entities_involved = entity_map[# _conflict_info.location[0],_conflict_info.location[1]]
+		var _conflict_info = ds_priority_delete_min(_conflict_list)
+		
+		var _xTile = _conflict_info[0]
+		var _yTile = _conflict_info[1]
+		
+		var _entities_involved = entity_map[# _xTile, _yTile]
+
+		var _real_tile = global.board[# _xTile, _yTile]
+		
+		var _square_taken = false
+		var _new_square = []
+		var _entities_on_square = 0
+		
+		var _is_void = _real_tile[MAP_DATA.TILE] == noone
+	
+		for (var i = 0; i < array_length(_entities_involved); i++) {
 			
-			//Check who initiated, if both are moving? do something idk
-			//TODO change this so that it takes from the database instead (for consistancy)
-			var _entity_priority = ds_priority_create()
-			var _interactable_entities = []
-					
-			for (var i = 0; i < array_length(_entities_involved); i++) {
-				var _e = _entities_involved[i];
-                if (_e.xTile != _e.xPrev || _e.yTile != _e.yPrev) {
-					ds_priority_add(_entity_priority,_e,_e.entity_id)
-			    }else{
-					array_push(_interactable_entities,_e)
-				}
+			var _e = _entities_involved[i]
+			var _can_take = true
+
+			//If there is a void here, someone has to go and fill it first
+			if _is_void{
+				_is_void = false
+				_add_step_action(ACTION.MOVE, _e)
+				_add_step_action(ACTION.FALL, _e)
+				
+				continue
+			}
+			
+			
+			//Check if any of the entites on this square can be interacted with
+			for(var j = 0; j < _entities_on_square; j++){
+				var _interact = _new_square[j]
+				
+				if _interact.stop = true{
+					_can_take = false
+				}	
 			}
 				
-			array_sort(_interactable_entities, function( a, b){
-				return a.entity_id - b.entity_id;	
-			
-			})
-				
-				while !ds_priority_empty(_entity_priority){
-					var _e = ds_priority_delete_min(_entity_priority)
-					
-					var _can_move = false
-					
-					
-					for(var i = 0; i < array_length(_interactable_entities); i ++){
-						var _interaction_entity = _interactable_entities[i]
+			if _can_take{
+				array_push(_new_square,_e)
+				_entities_on_square ++
+			}else{
+				_e.xTile = _e.xPrev
+				_e.yTile = _e.yPrev
+				add_to_entity_map(_e)
+			}
 						
-						if _interaction_entity.interact_script != noone{
-							//script_execute(_interaction_entity.interact_script)
-						}
-					}
-					
-					if !_can_move{
-						_e.xTile = xPrev
-						_e.yTile = yPrev
-					}
-					
-				}
-				
-				
-				ds_priority_destroy(_entity_priority)
-		
-			
 		}
 		
 		
-		//Preform movement, and interactions
-		for(var i = 0; i < array_length(_update_list); i ++){
-			for(var j = 0; j < array_length(_update_list[i]); j ++){
-
-				var _cur = _update_list[i][j]
-				var _inst = _cur[0]
-				var _action = _cur[1]
-			
-				switch (_action){
-					case ACTION.MOVE:
-						_inst.update_pos()
-					break
-					case ACTION.FALL:
-						_inst.fall()
-					break
-				}
-			
-			
-			}
-		}
-		
-
-		//moving to square with a stationary object
-		//
-		
-		//Resolve any conflicts
-		
-	
-	
-		
-		
-		break
-		
-		
-		
+								
 	}
 	
 	
 
+	
+	//Preform movement, and interactions
+	for(var i = 0; i < array_length(_update_list); i ++){
+		for(var j = 0; j < array_length(_update_list[i]); j ++){
+
+			var _cur = _update_list[i][j]
+			var _inst = _cur[0]
+			var _action = _cur[1]
+			if !instance_exists(_inst) continue
+			switch (_action){
+				case ACTION.MOVE:
+					_inst.update_pos()
+				break
+				case ACTION.FALL:
+					_inst.fall()
+				break
+			}
+		}
+	}
+	
 	ds_priority_destroy(_conflict_list)
 	
 	

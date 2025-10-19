@@ -80,6 +80,7 @@
     {"name":"Script16","order":41,"path":"scripts/Script16/Script16.yy",},
     {"name":"setup_board_camera","order":1,"path":"scripts/setup_board_camera/setup_board_camera.yy",},
     {"name":"setup_map_camera","order":3,"path":"scripts/setup_map_camera/setup_map_camera.yy",},
+    {"name":"step_move","order":8,"path":"scripts/step_move/step_move.yy",},
     {"name":"step_player","order":7,"path":"scripts/step_player/step_player.yy",},
     {"name":"tile_to_pos","order":5,"path":"scripts/tile_to_pos/tile_to_pos.yy",},
     {"name":"transition","order":2,"path":"scripts/transition/transition.yy",},

@@ -1,7 +1,7 @@
 function init_entity_details(_id){
 	switch(_id){
 		case ENITITY.PLAYER:
-			stop = false
+			stop = true
 			sprite_index = sPlayerIdle
 			step_script = step_player
 		break
@@ -13,9 +13,10 @@ function init_entity_details(_id){
 			
 		break
 		case ENITITY.BOX:
-			moveable = true
+			moveable = false
 			stop = true
 			sprite_index = sBox
+			step_script = step_move
 		break
 		case ENITITY.LOCK:
 

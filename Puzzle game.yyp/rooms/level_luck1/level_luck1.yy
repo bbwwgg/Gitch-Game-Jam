@@ -17,7 +17,7 @@
       ],"layers":[],"name":"Controllers","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRTileLayer":"","%Name":"Entities","depth":300,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Entities","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":8,"SerialiseWidth":8,"TileCompressedData":[
           -11,-2147483648,-2,0,-4,-2147483648,8,0,2,0,0,6,0,-2147483648,-2147483648,-3,0,5,4,0,0,-2147483648,-2147483648,
-          -6,0,-2,-2147483648,6,0,7,0,4,0,0,-3,-2147483648,-5,0,-3,-2147483648,-2,0,4,1,-2147483648,-2147483648,
+          -6,0,-2,-2147483648,6,0,7,0,4,0,0,-3,-2147483648,5,3,0,0,3,0,-3,-2147483648,-2,0,4,1,-2147483648,-2147483648,
           0,
         ],"TileDataFormat":1,},"tilesetId":{"name":"sEntityTiles","path":"tilesets/sEntityTiles/sEntityTiles.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
     {"$GMRTileLayer":"","%Name":"Objects","depth":400,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Objects","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":8,"SerialiseWidth":8,"TileCompressedData":[

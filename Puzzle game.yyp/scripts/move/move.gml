@@ -11,6 +11,7 @@ function move(_inst, _dir){
 	var _start_x = _inst.xTile
 	var _start_y = _inst.yTile
 	
+
 	_inst.xPrev = _start_x
 	_inst.yPrev = _start_y
 
@@ -49,26 +50,27 @@ function move(_inst, _dir){
 		return false
 	}
 	
-	/*
+	
 	if _next_square[MAP_DATA.ENTITY] != noone{
-		var _inst_to_find = global.entity_key[_next_square[MAP_DATA.ENTITY] [0],_next_square[MAP_DATA.ENTITY][1]]
 		
-		if _inst_to_find == oPlayerController.entity_map[# _start_x, _start_y]{
-			return false
+		var _inst_to_find = global.entity_key[_next_square[MAP_DATA.ENTITY][0],_next_square[MAP_DATA.ENTITY][1]]
+		
+		var _prev_square_new_entity = oPlayerController.entity_map[# _start_x, _start_y]
+		if _prev_square_new_entity != 0{
+		
+			if _inst_to_find == _prev_square_new_entity[0]{
+				return false
+			}
 		}
-	}*/
+	}
 	
 
 	
 	_inst.xTile = _end_x
 	_inst.yTile = _end_y
 	
-	//if global.board[# xTile, yTile][MAP_DATA.TILE] != noone{
-	//	_add_step_action(ACTION.MOVE, _inst)
-	//}
-	
-	add_to_entity_map(_inst)
-	
+	_add_step_action(ACTION.MOVE, _inst)
+
 	return true
 	
 	/*

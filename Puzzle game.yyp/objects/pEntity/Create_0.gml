@@ -36,6 +36,7 @@ function update_pos(){
 	x = tile_to_x(xTile)
 	y = tile_to_y(yTile)
 	
+	
 	if !sunk{
 		depth = -y
 		

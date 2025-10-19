@@ -115,6 +115,7 @@
     {"id":{"name":"Script16","path":"scripts/Script16/Script16.yy",},},
     {"id":{"name":"setup_board_camera","path":"scripts/setup_board_camera/setup_board_camera.yy",},},
     {"id":{"name":"setup_map_camera","path":"scripts/setup_map_camera/setup_map_camera.yy",},},
+    {"id":{"name":"step_move","path":"scripts/step_move/step_move.yy",},},
     {"id":{"name":"step_player","path":"scripts/step_player/step_player.yy",},},
     {"id":{"name":"tile_to_pos","path":"scripts/tile_to_pos/tile_to_pos.yy",},},
     {"id":{"name":"transition","path":"scripts/transition/transition.yy",},},

@@ -129,7 +129,9 @@ for(var i = 0; i < grid_height; i ++){
 				entity_id = _entity
 				xTile = j
 				yTile = i
-				global.board[# j, i][MAP_DATA.ENTITY] = id
+				xPrev = xTile
+				yPrev = yTile
+				
 				
 				init_entity_details(entity_id)
 				
@@ -144,8 +146,10 @@ for(var i = 0; i < grid_height; i ++){
 				var _inst_count = array_length(global.entity_key[entity_id])
 	
 				entity_key = _inst_count - 1
-	
+				global.board[# j, i][MAP_DATA.ENTITY] = [entity_id,entity_key]
 				update_pos()
+				
+
 			}
 
 		}
