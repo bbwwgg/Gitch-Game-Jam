@@ -91,6 +91,7 @@
     {"id":{"name":"level_select2","path":"rooms/level_select2/level_select2.yy",},},
     {"id":{"name":"rmStartRoom","path":"rooms/rmStartRoom/rmStartRoom.yy",},},
     {"id":{"name":"__commit_step","path":"scripts/__commit_step/__commit_step.yy",},},
+    {"id":{"name":"__entity_data","path":"scripts/__entity_data/__entity_data.yy",},},
     {"id":{"name":"_add_step_action","path":"scripts/_add_step_action/_add_step_action.yy",},},
     {"id":{"name":"active_surrounding","path":"scripts/active_surrounding/active_surrounding.yy",},},
     {"id":{"name":"add_to_entity_map","path":"scripts/add_to_entity_map/add_to_entity_map.yy",},},

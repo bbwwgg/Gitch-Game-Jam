@@ -72,8 +72,9 @@ function fall(){
 		
 	play_sfx(sfxWispSound)
 	
-	var _x = xTile//x + lengthdir_x(TILE_SIZE,dir*90)
-	var _y = yTile//y + lengthdir_y(TILE_SIZE,dir*90)
+	
+	var _x = tile_to_x(xTile)
+	var _y = tile_to_y(yTile)
 	instance_create_layer(_x,_y,"effects", oPartSplash)
 	
 	//TODO change this to a larger var
@@ -135,7 +136,7 @@ function explode(){
 				var _x = x + lengthdir_x(TILE_SIZE,dir*90)
 				var _y = y + lengthdir_y(TILE_SIZE,dir*90)
 			
-				with instance_create_layer(_x+TILE_SIZE/2,_y+TILE_SIZE/2,"effects", oEffect){
+				with instance_create_layer(_x,_y,"effects", oEffect){
 					sprite_index = sPlayerFace
 				
 					depth = -999

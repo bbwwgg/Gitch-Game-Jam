@@ -104,6 +104,9 @@ global.board = ds_grid_create(grid_width,grid_height)
 setup_board_camera()
 
 
+__entity_data()
+//
+
 //Create a key of all entities
 global.entity_key = array_create(ENITITY.COUNT, noone)
 
@@ -132,9 +135,16 @@ for(var i = 0; i < grid_height; i ++){
 				xPrev = xTile
 				yPrev = yTile
 				
-				
-				init_entity_details(entity_id)
-				
+				var keys = variable_struct_get_names(other._entity_data[entity_id]);
+
+				// Loop through the array of keys
+				for (var z = 0; z < array_length(keys); z++)
+				{
+				    var key = keys[z]; // Get the name of the current variable
+				    var value = other._entity_data[entity_id][$ key]; // Get the value of the current variable using the accessor
+					variable_instance_set(self, key, value)
+				}
+	
 				var _entity_key = global.entity_key[entity_id]
 				
 				if _entity_key == noone{
@@ -274,7 +284,16 @@ function undo_board_state() {
 				entity_key = _cur_set.entity_key
 				entity_id = _cur_set.object_type
 				global.entity_key[entity_id,entity_key] = id
-				init_entity_details(entity_id)
+				
+				var keys = variable_struct_get_names(other._entity_data[entity_id]);
+
+				// Loop through the array of keys
+				for (var z = 0; z < array_length(keys); z++)
+				{
+				    var key = keys[z]; // Get the name of the current variable
+				    var value = other._entity_data[entity_id][$ key]; // Get the value of the current variable using the accessor
+					variable_instance_set(self, key, value)
+				}
 			}
 
 		}

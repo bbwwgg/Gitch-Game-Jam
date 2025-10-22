@@ -61,6 +61,7 @@
     {"name":"level_select2","order":1,"path":"rooms/level_select2/level_select2.yy",},
     {"name":"rmStartRoom","order":5,"path":"rooms/rmStartRoom/rmStartRoom.yy",},
     {"name":"__commit_step","order":6,"path":"scripts/__commit_step/__commit_step.yy",},
+    {"name":"__entity_data","order":54,"path":"scripts/__entity_data/__entity_data.yy",},
     {"name":"active_surrounding","order":5,"path":"scripts/active_surrounding/active_surrounding.yy",},
     {"name":"add_to_entity_map","order":52,"path":"scripts/add_to_entity_map/add_to_entity_map.yy",},
     {"name":"adding_wisps","order":2,"path":"scripts/adding_wisps/adding_wisps.yy",},

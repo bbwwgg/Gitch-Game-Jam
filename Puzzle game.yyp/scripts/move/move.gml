@@ -57,7 +57,6 @@ function move(_inst, _dir){
 		
 		var _prev_square_new_entity = oPlayerController.entity_map[# _start_x, _start_y]
 		if _prev_square_new_entity != 0{
-		
 			if _inst_to_find == _prev_square_new_entity[0]{
 				return false
 			}
