@@ -63,7 +63,11 @@ function __commit_step(){
 				
 				if _interact.interact_script != noone{
 					_interact.interact(_e)
-
+				
+					if !instance_exists(_interact){
+						array_delete(_new_square,j,1)
+						continue	
+					}
 				}
 				
 				

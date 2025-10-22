@@ -225,7 +225,7 @@ function save_board_state() {
 		var _inst_info = {
 			object_type : _ent_id,
 			entity_key : _inst.entity_key,
-			pos : [_inst.xTile, _inst.yTile],
+			pos : [_inst.xTile, _inst.yTile, _inst.xPrev, _inst.yPrev],
 			vars: _saved_vars
 		}
 		array_push(_entities,_inst_info)
@@ -310,12 +310,12 @@ function undo_board_state() {
 		
 		with _cur_entity {
 
-			xPrev = xTile
-			yPrev = yTile
 
 			xTile = _cur_set.pos[0]
 			yTile = _cur_set.pos[1]
-					
+			xPrev = _cur_set.pos[2]
+			yPrev = _cur_set.pos[3]
+
 			update_pos()		
 				
 			

@@ -1,14 +1,8 @@
 function interact_lock(){
 	
 	
-	if lock_status != -1{
-		moveable = true
-		interactable = false
-		return
-	}
-	
 	// Only change status if we are being interacted with by a player or luck block
-	if 	interacting_inst.use_luck = false{ return}
+	if 	interacting_inst.use_luck = false || lock_status != -1{ return}
 	
 
 	var _luck;
@@ -36,10 +30,12 @@ function interact_lock(){
 	}
 		
 	lock_status = _luck
+	
 	if _luck <= 4{
 		image_index ++
 		camera_shake(3, 0.65) 
 		play_sfx(sfxLock)
+		moveable = true
 	}else{
 		explode()
 	}
