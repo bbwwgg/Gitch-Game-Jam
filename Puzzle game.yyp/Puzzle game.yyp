@@ -99,7 +99,6 @@
     {"id":{"name":"CAMERA_MACROS","path":"scripts/CAMERA_MACROS/CAMERA_MACROS.yy",},},
     {"id":{"name":"camera_shake","path":"scripts/camera_shake/camera_shake.yy",},},
     {"id":{"name":"clone_deep_board","path":"scripts/clone_deep_board/clone_deep_board.yy",},},
-    {"id":{"name":"init_entity_details","path":"scripts/init_entity_details/init_entity_details.yy",},},
     {"id":{"name":"interact_flag","path":"scripts/interact_flag/interact_flag.yy",},},
     {"id":{"name":"interact_lock","path":"scripts/interact_lock/interact_lock.yy",},},
     {"id":{"name":"interact_luck","path":"scripts/interact_luck/interact_luck.yy",},},

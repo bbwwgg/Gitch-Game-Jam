@@ -1,13 +1,3 @@
-if sunk{
-	y_offset = round(0.75*sin(time*0.05)+2)	
-	time ++
-}else{
-	y_offset = 0	
-}
-
-
-
-
 switch(entity_id){
 
 	case ENITITY.LUCK_BLOCK:
@@ -15,7 +5,7 @@ switch(entity_id){
 
 		draw_sprite_ext(sprite_index,image_index,x,y+y_offset,1,1,0,c_white,image_alpha)
 		var _string_height = "";
-		if !sunk and entity_var != -1{
+		if entity_var != -1{
 			
 			var _draw_number = entity_var
 			

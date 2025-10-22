@@ -1,7 +1,6 @@
-interactable = false
 stop = true
 moveable = false
-sunk = false
+use_luck = false
 
 xscale = 1
 yscale = 1
@@ -37,15 +36,15 @@ function update_pos(){
 	y = tile_to_y(yTile)
 	
 	
-	if !sunk{
-		depth = -y
+
+	depth = -y
 		
-		if  entity_id = ENITITY.FLAG or 
-		entity_id = ENITITY.PUSH_UP or entity_id = ENITITY.PUSH_DOWN
-		 or entity_id = ENITITY.PUSH_LEFT or entity_id = ENITITY.PUSH_RIGHT{
-			depth += 16
-		}
+	if  entity_id = ENITITY.FLAG or 
+	entity_id = ENITITY.PUSH_UP or entity_id = ENITITY.PUSH_DOWN
+	or entity_id = ENITITY.PUSH_LEFT or entity_id = ENITITY.PUSH_RIGHT{
+		depth += 16
 	}
+
 	
 	if entity_id = ENITITY.PLAYER{
 		if sprite_index != sPlayerWalk{
@@ -87,7 +86,6 @@ function fall(){
 		break
 		
 		case ENITITY.PLAYER:
-			sunk = false
 			explode()
 			//visible = false
 		break
@@ -119,6 +117,7 @@ function explode(){
 		moveable = false
 		camera_shake(6, 0.75) 
 		
+		instance_destroy()
 
 		if array_length(global.board[# xTile, yTile][MAP_DATA.ENTITY]) = 0{
 			global.board[# xTile, yTile][MAP_DATA.ENTITY] = noone

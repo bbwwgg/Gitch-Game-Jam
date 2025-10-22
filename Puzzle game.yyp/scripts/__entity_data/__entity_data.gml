@@ -6,6 +6,8 @@ _entity_data = array_create(ENITITY.COUNT)
 _entity_data[ENITITY.PLAYER] = {
         stop: true,
         sprite_index: sPlayerIdle,
+		use_luck: true,
+		luck: -1,
         step_script: step_player
 }
 
@@ -25,7 +27,7 @@ _entity_data[ENITITY.BOX] = {
 
 _entity_data[ENITITY.LOCK] = {
         stop: true,
-        entity_var: -1,
+        lock_status: -1,
         interact_script: interact_lock,
         sprite_index: sLock,
         image_speed: 0
@@ -52,6 +54,8 @@ _entity_data[ENITITY.LUCK_BLOCK] = {
         stop: true,
         moveable: true,
         entity_var: -1,
+		use_luck: true,
+		luck: -1,
         interact_script: interact_luck,
         sprite_index: sLuck,
         image_speed: 0

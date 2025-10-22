@@ -61,6 +61,13 @@ function __commit_step(){
 			for(var j = 0; j < _entities_on_square; j++){
 				var _interact = _new_square[j]
 				
+				if _interact.interact_script != noone{
+					_interact.interact(_e)
+
+				}
+				
+				
+				
 				if _interact.stop = true{
 					_can_take = false
 				}	

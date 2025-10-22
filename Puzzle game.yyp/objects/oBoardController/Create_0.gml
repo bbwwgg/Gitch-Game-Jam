@@ -183,8 +183,6 @@ oPlayerController.entity_map = ds_grid_create(grid_width,grid_height)
 base_xOffset = global.camera_margin_width
 base_yOffset = global.camera_margin_height
 
-
-
 state = LEVEL_STATE.ENTER
 
 animation_timer = 60
@@ -204,20 +202,31 @@ function save_board_state() {
 	for (var i = 0; i < instance_number(pEntity); i++){
 	    var _inst = instance_find(pEntity, i);
 		
+		var _ent_id = _inst.entity_id
+		
+		var _saved_vars = {
+			stop: _inst.stop,
+			moveable: _inst.moveable,
+			image_index : _inst.image_index
+		}
+		var keys = variable_struct_get_names(_entity_data[_ent_id]);
+		
+		// Loop through the array of keys
+		for (var z = 0; z < array_length(keys); z++)
+		{
+			var key = keys[z]; // Get the name of the current variable
+			if key = "stop" || key = "moveable"{
+				continue	
+			}
+			
+			variable_struct_set(_saved_vars,key,variable_instance_get(_inst, key))		
+		}
+		
 		var _inst_info = {
-			object_type : _inst.entity_id,
+			object_type : _ent_id,
 			entity_key : _inst.entity_key,
 			pos : [_inst.xTile, _inst.yTile],
-			vars: {
-	            interactable: _inst.interactable,
-	            stop: _inst.stop,
-	            moveable: _inst.moveable,
-	            sunk: _inst.sunk,
-				visible : _inst.visible,
-				image_index : _inst.image_index,
-				depth : _inst.depth,
-				entity_var : _inst.entity_var
-            }
+			vars: _saved_vars
 		}
 		array_push(_entities,_inst_info)
 	}
@@ -309,14 +318,18 @@ function undo_board_state() {
 					
 			update_pos()		
 				
-			interactable = _cur_set.vars.interactable
-			stop = _cur_set.vars.stop
-			moveable = _cur_set.vars.moveable
-			sunk = _cur_set.vars.sunk
-			visible = _cur_set.vars.visible
-			image_index = _cur_set.vars.image_index
-			depth = _cur_set.vars.depth
-			entity_var = _cur_set.vars.entity_var
+			
+			var _var_data = _cur_set.vars
+			var keys = variable_struct_get_names(_var_data);
+		
+			// Loop through the array of keys
+			for (var z = 0; z < array_length(keys); z++)
+			{
+				var key = keys[z]; // Get the name of the current variable
+				
+				variable_instance_set(self,key,variable_struct_get(_var_data,key))
+
+			}
 		}
 		
 	}
