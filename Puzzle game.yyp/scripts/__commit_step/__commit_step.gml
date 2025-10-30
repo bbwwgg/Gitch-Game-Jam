@@ -69,9 +69,7 @@ function __commit_step(){
 						continue	
 					}
 				}
-				
-				
-				
+								
 				if _interact.stop = true{
 					_can_take = false
 				}	

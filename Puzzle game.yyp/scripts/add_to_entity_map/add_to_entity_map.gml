@@ -35,7 +35,7 @@ function add_to_entity_map(_entity){
 			array_insert(_arr,_insert_at,_id)
 			
 			entity_map[# xTile, yTile] = _arr
-			
+			 
 			ds_priority_add(_conflict_list,[xTile,yTile],_prio)
 		}else{		
 			entity_map[# xTile, yTile] = [_id]
